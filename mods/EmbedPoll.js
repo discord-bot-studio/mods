@@ -3,13 +3,13 @@ module.exports = {
     // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
     name: "Embed Poll",
 
-    // Pace the author of the mod here. This is an array so you can add multiple authors.
+    // Place the author of the mod here. This is an array so you can add multiple authors.
     author: ["Discord Bot Studio"],
 
     // Place the version of the mod here.
     version: "1.0.0",
 
-    // Whenever you make a change place the changelog here.
+    // Whenever you make a change, place the changelog here.
     changelog: "Created Poll Mod",
 
     // Set this to true if this will be an event.
@@ -21,7 +21,7 @@ module.exports = {
     // Set this to true if this will be a response mod.
     isMod: true,
 
-    // If you want to modify a core feature set this to true
+    // If you want to modify a core, feature set this to true.
     isAddon: false,
 
     // Here you can define where you want your mod to show up inside of Discord Bot Studio (what category in the dropdown when adding a response)
@@ -31,38 +31,35 @@ module.exports = {
     // attribute, so each input must have a NAME attribute.
     html: function (data) {
         return `<p><strong>Max of 10 options</strong></p>
-        <div class="form-group">
-        <label>Title *</label>
-        <input class="form-control needed-field" name="title" />
-    </div>
+                <div class="form-group">
+                    <label>Title *</label>
+                    <input class="form-control needed-field" name="title" />
+                </div>
     
-    <div class="form-group">
-                                        <label>Color</label>
-                                        <input class="form-control jscolor" id="color" placeholder="#FFFFFF" name="color">
-                                        <small class="form-text text-muted">Hex color</small>
-                                    </div>
-
-                                    <div class="form-group">
-                                            <label>Description</label>
-                                            <textarea rows="5" class="form-control" id="description" name="description"></textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                            <label>Thumbnail</label>
-                                            <input class="form-control" id="thumbnail" name="thumbnail">
-                                            <small class="form-text text-muted">Url of thumbnail image</small>
-                                    </div>
-                                    <div class="form-group">
-                                            <label>Image</label>
-                                            <input class="form-control" id="image" name="image">
-                                            <small class="form-text text-muted">Main embed image url</small>
-                                    </div>
-                                    <div class="form-group">
-                                            <label>Poll options * (max of 10)</label>
-                                            <input class="form-control needed-field" id="options" name="options">
-                                            <small class="form-text text-muted">Separate poll choices with comma here</small>
-                                    </div>
-    `;
+                <div class="form-group">
+                    <label>Color</label>
+                    <input class="form-control jscolor" id="color" placeholder="#FFFFFF" name="color">
+                    <small class="form-text text-muted">Hex color</small>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea rows="5" class="form-control" id="description" name="description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Thumbnail</label>
+                    <input class="form-control" id="thumbnail" name="thumbnail">
+                    <small class="form-text text-muted">Url of thumbnail image</small>
+                </div>
+                <div class="form-group">
+                    <label>Image</label>
+                    <input class="form-control" id="image" name="image">
+                    <small class="form-text text-muted">Main embed image url</small>
+                </div>
+                <div class="form-group">
+                    <label>Poll options * (max of 10)</label>
+                    <input class="form-control needed-field" id="options" name="options">
+                    <small class="form-text text-muted">Separate poll choices with comma here</small>
+                </div>`;
     },
 
     // When the bot is first started this code will be ran.
@@ -98,7 +95,7 @@ module.exports = {
                 }
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 };
