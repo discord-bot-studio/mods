@@ -3,13 +3,13 @@ module.exports = {
     // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
     name: "Message Mod",
 
-    // Pace the author of the mod here. This is an array so you can add other authors by doing "Great Plains Modding", "New User"
+    // Place the author of the mod here. This is an array so you can add other authors by writing ["Great Plains Modding", "New User"]
     author: ["Discord Bot Studio"],
 
     // Place the version of the mod here.
     version: "1.0.0",
 
-    // Whenever you make a change please pace the changelog here with your name. Created Send Message ~ Great Plains Modding\n
+    // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
     changelog: "Created Send Message ~ Great Plains Modding",
 
     // Set this to true if this will be an event.
@@ -20,7 +20,7 @@ module.exports = {
     // Set this to true if this will be a response mod.
     isMod: true,
 
-    // If you want to modify a core feature set this to true
+    // If you want to modify a core feature, set this to true.
     isAddon: false,
 
     // Here you can define where you want your mod to show up inside of Discord Bot Studio
@@ -44,7 +44,7 @@ module.exports = {
         `;
     },
 
-    // When the bot is first started this code will be ran.
+    // When the bot is first started, this code will be ran.
     init: function() {
         console.log("Loaded send message");
     },
