@@ -14,6 +14,8 @@ module.exports = {
 
     // Set this to true if this will be an event.
     isEvent: false,
+    
+    isResponse: true,
 
     // Set this to true if this will be a response mod.
     isMod: true,
@@ -48,7 +50,7 @@ module.exports = {
     },
 
     // Place your mod here.
-    mod: function(DBS, message, action, args) {
+    mod: function(DBS, message, action, args, command, index) {
         switch (action.channelname) {
             case "sameChannel":
                 message.channel.send(action.messagetext);
