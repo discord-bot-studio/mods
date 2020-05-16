@@ -4,7 +4,7 @@ This repo serves to house mods for DBS. Please see example_mod.js to see how mod
 # To install mods:
 1. Download this repo by clicking the "Clone or Download" button on the repo homepage
 ![download](https://i.imgur.com/mz0ICXW.png)
-2. Locate the javascript (.js) file for the mod(s) you want to add. 
+2. Locate the javascript (.js) file for the mod(s) you want to add inside the mods folder of this repo. 
 3. Copy that file(s).
 4. Open the BotFiles folder for the bot you want to add the mods to. This folder will be located in the location you chose to create the bot in.
 5. Paste the js files inside the "mods" folder inside BotFiles (/BotFiles/mods).
