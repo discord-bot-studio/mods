@@ -1,5 +1,5 @@
 # Mods
-This repo serves to house mods for DBS. Please see example_mod.js to see how modding works in DBS.
+This repo serves to house mods for DBS. Please see example_mod.js to see how modding works in DBS. DBS does not hold responsibility for the content and effects of 3rd party mods you install.
 
 # To install mods:
 1. Download this repo by clicking the "Clone or Download" button on the repo homepage
