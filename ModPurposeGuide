@@ -1,0 +1,11 @@
+Mod Purpose Guide
+Updated: 6/14/20
+
+1. EmbedPoll
+Embeds a poll with up to 9 different options to vote for
+
+2. Wait
+Makes the bot wait before starting the next response(s) and sends message saying waiting
+
+3. Edited Wait
+Same as wait except removes the waiting message and moves the response to bot actions
