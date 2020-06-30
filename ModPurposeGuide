@@ -10,5 +10,5 @@ Makes the bot wait before starting the next response(s) and sends message saying
 3. EditedWait
 Same as wait except removes the waiting message and moves the response to bot actions
 
-4. WatchingStatus
-Add watching to use in bot status instead of just playing
+4. MoreStatus
+Adds watching and listening to use in bot status instead of just playing
