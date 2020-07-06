@@ -12,3 +12,6 @@ Same as wait except removes the waiting message and moves the response to bot ac
 
 4. MoreStatus
 Adds watching and listening to use in bot status instead of just playing
+
+5. PingMessage
+Adds ability to make a ping command use $$ping$$ to insert ping
