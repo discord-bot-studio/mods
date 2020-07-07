@@ -1,5 +1,5 @@
 Mod Purpose Guide
-Updated: 6/29/20
+Updated: 7/6/20
 
 1. EmbedPoll
 Embeds a poll with up to 9 different options to vote for
@@ -12,3 +12,6 @@ Same as wait except removes the waiting message and moves the response to bot ac
 
 4. MoreStatus
 Adds watching and listening to use in bot status instead of just playing
+
+5. PingMessage
+Adds ability to make a ping command use $$ping$$ to insert ping
