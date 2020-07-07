@@ -2,16 +2,16 @@ Mod Purpose Guide
 Updated: 7/6/20
 
 1. EmbedPoll
-Embeds a poll with up to 9 different options to vote for
+Embeds a poll with up to 9 different options to vote for.
 
 2. Wait
-Makes the bot wait before starting the next response(s) and sends message saying waiting
+Makes the bot wait before starting the next response(s) and sends message saying waiting.
 
 3. EditedWait
-Same as wait except removes the waiting message and moves the response to bot actions
+Same as wait except removes the waiting message and moves the response to bot actions.
 
 4. MoreStatus
-Adds watching and listening to use in bot status instead of just playing
+Adds watching and listening to use in bot status instead of just playing. Also adds the ability to insert server count into bot status using $$servers$$.
 
 5. PingMessage
-Adds ability to make a ping command use $$ping$$ to insert ping
+Adds ability to make a ping command use $$ping$$ to insert ping.
