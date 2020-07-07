@@ -4,13 +4,13 @@ module.exports = {
     name: "Edited Wait",
 
     // Place the author of the mod here. This is an array so you can add multiple authors.
-    author: ["Wait mod by Discord Bot Studio, Edited by Vannzilla"],
+    author: ["Discord Bot Studio", "Vannzilla#5260"],
 
     // Place the version of the mod here.
-    version: "1.0.0",
+    version: "0.2.0",
 
     // Whenever you make a change, place the changelog here.
-    changelog: "Edited wait mod",
+    changelog: "Edited the Wait mod, removed wait message and moved to bot actions",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -51,7 +51,7 @@ module.exports = {
 
             if (!isNaN(Number(action.seconds))) {
                 var milliseconds = Number(action.seconds) * 1000;
-                message.channel.send("");
+                console.log('Wating for ' + action.seconds + ' second(s)')
                 await timer(milliseconds);
                 
                 // Must call this, or the rest of the response sequence will not run
