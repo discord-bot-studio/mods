@@ -15,3 +15,6 @@ Adds watching and listening to use in bot status instead of just playing. Also a
 
 5. PingMessage
 Adds ability to make a ping command use $$ping$$ to insert ping.
+
+6. TTSMessage
+Adds the ability to send a TTS(text to speech) message.
