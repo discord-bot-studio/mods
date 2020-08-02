@@ -4,13 +4,13 @@ module.exports = {
     name: "More Status",
 
     // Place the author of the mod here. This is an array so you can add other authors by writing ["Great Plains Modding", "New User"]
-    author: ["Vannzilla#5260"],
+    author: ["Vannzilla#5260, Revised by Big D#1129"],
 
     // Place the version of the mod here.
-    version: "0.3.0",
+    version: "0.3.1",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
-    changelog: "Added watching and listening status options and the ability to add server count to status",
+    changelog: "Added watching and listening status options and the ability to add server/member count to status",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -38,7 +38,7 @@ module.exports = {
                 </select>
             </div>
             <div class="form-group">
-                <label>Status, you can insert server count using $$servers$$ (other variables not supported) *</label>
+                <label>To show the server or member count, use $$Servers$$ or $$Members$$  (other variables not supported) *</label>
                 <textarea class="form-control needed-field" name="statusText" rows="1" ></textarea>
             </div>
         `;
@@ -52,7 +52,9 @@ module.exports = {
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
         var status = action.statustext;
-        status = status.replace("$$servers$$", DBS.Bot.guilds.size);
+        status = status.replace("$$Servers$$", DBS.Bot.guilds.size);
+        status = status.replace("$$Members$$", DBS.Bot.users.size);
+
         DBS.Bot.user.setActivity(status, { type: action.statusoption})
         
         DBS.callNextAction(command, message, args, index + 1);
