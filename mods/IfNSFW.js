@@ -7,10 +7,10 @@ module.exports = {
     author: ["Vannzilla#5260"],
 
     // Place the version of the mod here.
-    version: "0.1.0",
+    version: "0.2.0",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
-    changelog: "Added if NSFW node",
+    changelog: "Added failed messge response option ~Vannzilla",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -35,23 +35,39 @@ module.exports = {
                     <option value="True" selected>True</option>
                     <option value="False">False</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Failed Message Text</label>
+                <textarea rows="1" class="form-control" name="failedmessage"></textarea>
+            </div>
         `;
     },
 
     // When the bot is first started, this code will be ran.
     init: function() {
-        console.log("Loaded If NSFW");
+        console.log("Loaded If NSFW Mod");
     },
 
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
+        var failMessage = action.failedmessage
+
         if (action.nsfwtruefalse === 'True') {
             if (message.channel.nsfw) {
                 DBS.callNextAction(command, message, args, index + 1)
+            } else {
+                if (failMessage) {
+                    message.channel.send(failMessage)
+                }
             }
+
         } else {
-            if (message.channel.nsfw === false) {
+            if (!message.channel.nsfw) {
                 DBS.callNextAction(command, message, args, index + 1)
+            } else {
+                if (failMessage) {
+                    message.channel.send(failMessage)
+                }
             }
         }
     }
