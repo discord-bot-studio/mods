@@ -1,23 +1,41 @@
 Mod Purpose Guide
-Updated: 7/6/20
+Updated: 8/1/20
 
 1. EmbedPoll
 Embeds a poll with up to 9 different options to vote for.
+Dev: Discord Bot Studio
 
 2. Wait
 Makes the bot wait before starting the next response(s) and sends message saying waiting.
+Dev: Discord Bot Studio
 
 3. EditedWait
 Same as wait except removes the waiting message and moves the response to bot actions.
+Dev: Discord Bot Studio/Vannzilla#5260
 
 4. MoreStatus
 Adds watching and listening to use in bot status instead of just playing. Also adds the ability to insert server count into bot status using $$servers$$.
+Dev: Vannzilla#5260
 
 5. PingMessage
 Adds ability to make a ping command use $$ping$$ to insert ping.
+Dev: Vannzilla#5260
 
 6. TTSMessage
 Adds the ability to send a TTS(text to speech) message.
 
 7. CheckChannelID
 Adds the ability to check if the command was sent in a specified channel. If not the rest of the command strip will be terminated.
+Dev: Big D#1129
+
+7. IfNSFW
+Checks if command channel is NSFW
+Dev: Vannzilla#5260
+
+8. InvLink
+Sends customized message with your bots invite link using clinet ID and permission integer
+Dev: Vannzilla#5260
+
+9. ConsoleLog
+Logs message to the console
+Dev: Vannzilla#5260
