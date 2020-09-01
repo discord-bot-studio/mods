@@ -23,6 +23,9 @@ Dev: Vannzilla#5260
 
 6. TTSMessage
 Adds the ability to send a TTS(text to speech) message.
+
+7. CheckChannelID
+Adds the ability to check if the command was sent in a specified channel. If not the rest of the command strip will be terminated.
 Dev: Big D#1129
 
 7. IfNSFW
