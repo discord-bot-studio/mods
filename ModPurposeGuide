@@ -46,7 +46,7 @@ Ability to display the uptime of the bot.
 Dev: Big D#1129
 
 11. PinMod
-Makes the bot pin messages.
+Makes the bot pin a message.
 Dev: Hectoliters#7743
 
 12. ChannelProperties
