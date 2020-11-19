@@ -7,10 +7,10 @@ module.exports = {
     author: ["Hectoliters#7743"],
 
     // Place the version of the mod here.
-    version: "0.1.0",
+    version: "0.1.1",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
-    changelog: "Created Pin Mod ~ Hectoliters",
+    changelog: "Updated to fix some bugs ~ Hectoliters",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -58,5 +58,6 @@ module.exports = {
                 message.channel.send(action.messagetext).then((message) => message.pin());
                 break;
         }
+        DBS.callNextAction(command, message, args, index + 1);
         }
     };
