@@ -65,5 +65,6 @@ module.exports = {
                 message.channel.setTopic(action.channelinfo)
                  break;
         }
+        DBS.callNextAction(command, message, args, index + 1);
     }
 };
