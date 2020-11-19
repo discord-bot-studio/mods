@@ -44,3 +44,11 @@ Dev: Vannzilla#5260
 10. UpTime
 Ability to display the uptime of the bot.
 Dev: Big D#1129
+
+11. PinMod
+Makes the bot pin messages.
+Dev: Hectoliters#7743
+
+12. ChannelProperties
+Allows you to edit properties from channels such as name, parent/category and topic/description.
+Dev: Hectoliters#7743
