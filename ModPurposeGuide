@@ -60,3 +60,7 @@ Dev: Hectoliters#7743
 14. GetServerInfo
 Send a message containing the members, logo, and date of creation of the server.
 Dev: STR1KE#6969
+
+15. Unban
+Unban someone
+Dev: STR1KE#6969
