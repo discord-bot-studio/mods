@@ -56,3 +56,11 @@ Dev: Hectoliters#7743
 13. Loop
 Repeats previous nodes allowing you to make loops, counters and easy spam
 Dev: Hectoliters#7743
+
+14. GetServerInfo
+Send a message containing the logo and the creation date of the server.
+Dev: STR1KE#6969
+
+15. Unban
+Unban someone
+Dev: STR1KE#6969
