@@ -32,7 +32,7 @@ module.exports = {
     html: function(data) {
         return `
             <div class="form-group">
-                <label>Send a message displaying the server's info. Use $$members$$ $$icon$$ and $$date$$ to get the icon, members and creation date*</label>
+                <label>Send a message displaying the server's info. Use $$icon$$ and $$date$$ to get the icon and creation date*</label>
                 <textarea class="form-control needed-field" name="info" rows="1" ></textarea>
             </div>
            \
@@ -51,7 +51,7 @@ module.exports = {
         var serverMembers = message.guild.memberCount;
         
         var date = message.guild.createdAt;
-        serverInf = serverInf.replace("$$members$$", serverMembers);
+        //serverInf = serverInf.replace("$$members$$", serverMembers);
         serverInf = serverInf.replace("$$icon$$", serverIcon);
         serverInf = serverInf.replace("$$date$$", date);
         message.channel.send(serverInf);
