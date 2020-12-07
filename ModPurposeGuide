@@ -56,3 +56,6 @@ Dev: Hectoliters#7743
 13. Loop
 Repeats previous nodes allowing you to make loops, counters and easy spam
 Dev: Hectoliters#7743
+
+14. GetServerInfo
+Send a message containing the members, logo, and date of creation of the server.
