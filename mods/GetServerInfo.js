@@ -9,10 +9,10 @@ module.exports = {
     author: ["STR1KE#6969"],
 
     // Place the version of the mod here.
-    version: "0.1.0",
+    version: "0.1.1",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
-    changelog: "literally nothing",
+    changelog: "added back the member counter",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -32,7 +32,7 @@ module.exports = {
     html: function(data) {
         return `
             <div class="form-group">
-                <label>Send a message displaying the server's info. Use $$icon$$ and $$date$$ to get the icon and creation date*</label>
+                <label>Send a message displaying the server's info. Use $$members$$, $$icon$$ and $$date$$ to get the members, icon and creation date*</label>
                 <textarea class="form-control needed-field" name="info" rows="1" ></textarea>
             </div>
            \
@@ -51,7 +51,7 @@ module.exports = {
         var serverMembers = message.guild.memberCount;
         
         var date = message.guild.createdAt;
-        //serverInf = serverInf.replace("$$members$$", serverMembers);
+        serverInf = serverInf.replace("$$members$$", serverMembers);
         serverInf = serverInf.replace("$$icon$$", serverIcon);
         serverInf = serverInf.replace("$$date$$", date);
         message.channel.send(serverInf);
