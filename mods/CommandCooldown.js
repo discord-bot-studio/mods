@@ -11,7 +11,7 @@ module.exports = {
     version: "1.0.0",
 
     // Whenever you make a change, place the changelog here.
-    changelog: "nothing",
+    changelog: "Added command cooldown",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -32,11 +32,14 @@ module.exports = {
     // attribute, so each input must have a NAME attribute.
     html: function (data) {
         return `<div class="form-group">
+                    <label>Must be placed at the start of command </label>
+                </div>
+                <div class="form-group">
                     <label>Seconds to wait for *</label>
                     <input class="form-control needed-field" name="seconds" />
                 </div>
                 <div class="form-group">
-                    <label>Message to send when you are on cooldown.</label>
+                    <label>Message to send when you are on cooldown.*</label>
                     <input class="form-control needed-field" name="msg1" />
                 </div>
                 <div class="form-group">
