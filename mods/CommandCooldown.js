@@ -40,8 +40,8 @@ module.exports = {
                     <input class="form-control needed-field" name="msg1" />
                 </div>
                 <div class="form-group">
-                    <label>Message to send when you finish cooldown*</label>
-                    <input class="form-control needed-field" name="msg2" />
+                    <label>Message to send when you finish cooldown</label>
+                    <input class="form-control field" name="msg2" />
                 </div>`;
     },
 
@@ -66,7 +66,9 @@ module.exports = {
 
         usedCommand.add(message.author.id);
         setTimeout(() => {
-            message.reply(action.msg2)
+            if(!action.msg2 == ""){
+                message.reply(action.msg2);
+            }
             usedCommand.delete(message.author.id);
         }, delay);
 
