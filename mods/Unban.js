@@ -9,10 +9,10 @@ module.exports = {
     author: ["STR1KE#6969"],
 
     // Place the version of the mod here.
-    version: "0.1.0",
+    version: "0.1.1",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
-    changelog: "literally nothing",
+    changelog: "added the option to unban a mentioned person",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -32,7 +32,7 @@ module.exports = {
     html: function(data) {
         return `
             <div class="form-group">
-                <label>User to unban. Use $$id$$ to unban a mentioned id ex: -unban 4576587568568*</label>
+                <label>User to unban. Use $$id$$ to unban a mentioned id or tag: ex1: -unban 4576587568568 ex2: -unban <@!4576587568568> *</label>
                 <textarea class="form-control needed-field" name="id" rows="1" ></textarea>
             </div>
            \
@@ -49,6 +49,10 @@ module.exports = {
 
         var id = action.id;
         id = id.replace("$$id$$", args);
+        id = id.replace("@", "");
+        id = id.replace("!", "");
+        id = id.replace("<", "");
+        id = id.replace(">", "");
         message.guild.members.unban(id);
         
       
