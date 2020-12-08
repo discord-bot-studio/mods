@@ -2,7 +2,7 @@ const usedCommand = new Set();
 module.exports = {
     // Set this to the name of the mod. This is what will be shown inside of Discord Bot Studio.
     // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
-    name: "Cooldown",
+    name: "Command Cooldown",
 
     // Place the author of the mod here. This is an array so you can add multiple authors.
     author: ["STR1KE#6969"],
