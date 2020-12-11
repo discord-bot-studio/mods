@@ -60,9 +60,9 @@ module.exports = {
         }
         if(isNaN(slowmode1) == true){
             message.channel.send("That's not a valid amount!");
-        }else if(slowmode1 <= 0){
+        }else if(slowmode1 < 0){
             message.channel.send("That's not a valid amount!");
-        }else if(slowmode1 >= 21600){
+        }else if(slowmode1 > 21600){
             message.channel.send("That's not a valid amount!");
         }
        
