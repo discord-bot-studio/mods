@@ -55,9 +55,18 @@ module.exports = {
         message.channel.setRateLimitPerUser(slowmode1);
         var slowmsg = action.slowmsg;
         slowmsg = slowmsg.replace("$$slowmode$$", args);
-        if(!action.slowmsg == ""){
+        if(!action.slowmsg == "" && !slowmode1 == "" && slowmode1 >= 0 && slowmode1 <= 21600){
             message.channel.send(slowmsg);
         }
+        if(isNaN(slowmode1) == true){
+            message.channel.send("That's not a valid amount!");
+        }else if(slowmode1 <= 0){
+            message.channel.send("That's not a valid amount!");
+        }else if(slowmode1 >= 21600){
+            message.channel.send("That's not a valid amount!");
+        }
+       
+       
         DBS.callNextAction(command, message, args, index + 1);
     }
 };
