@@ -57,15 +57,17 @@ module.exports = {
         slowmsg = slowmsg.replace("$$slowmode$$", args);
         if(!action.slowmsg == "" && !slowmode1 == "" && slowmode1 >= 0 && slowmode1 <= 21600){
             message.channel.send(slowmsg);
+        }else{
+            message.channel.send("That's not a valid amount!");
         }
-        if(isNaN(slowmode1) == true){
+       /* if(isNaN(args) == true){
             message.channel.send("That's not a valid amount!");
         }else if(slowmode1 < 0){
             message.channel.send("That's not a valid amount!");
         }else if(slowmode1 > 21600){
             message.channel.send("That's not a valid amount!");
         }
-       
+       */
        
         DBS.callNextAction(command, message, args, index + 1);
     }
