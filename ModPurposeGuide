@@ -72,3 +72,7 @@ Dev: STR1KE#6969
 17. Slowmode
 Adds slowmode
 Dev: STR1KE#6969
+
+18. check if arguments are none
+If arguments are none then the nodes after the mod wont be called
+Dev: STR1KE#6960
