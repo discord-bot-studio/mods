@@ -44,3 +44,7 @@ Dev: Vannzilla#5260
 10. UpTime
 Ability to display the uptime of the bot.
 Dev: Big D#1129
+
+11. CheckRoleID
+Adds ability to check if the command was sent by someone with a specific role.
+Dev: Big D#1129
