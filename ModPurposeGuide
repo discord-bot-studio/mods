@@ -80,3 +80,7 @@ Dev: STR1KE#6960
 19. Delete Role from Server
 Deletes a defined role from Server
 Dev: 【qizzle】#9271
+
+20. CheckRoleID
+Adds ability to check if the command was sent by someone with a specific role.
+Dev: Big D#1129
