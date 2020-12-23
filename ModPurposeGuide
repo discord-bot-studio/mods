@@ -45,6 +45,42 @@ Dev: Vannzilla#5260
 Ability to display the uptime of the bot.
 Dev: Big D#1129
 
-11. CheckRoleID
+11. PinMod
+Makes the bot pin a message.
+Dev: Hectoliters#7743
+
+12. ChannelProperties
+Allows you to edit properties from channels such as name, parent/category and topic/description.
+Dev: Hectoliters#7743
+
+13. Loop
+Repeats previous nodes allowing you to make loops, counters and easy spam
+Dev: Hectoliters#7743
+
+14. GetServerInfo
+Send a message containing the logo, members and the creation date of the server.
+Dev: STR1KE#6969
+
+15. Unban
+Unban someone
+Dev: STR1KE#6969
+
+16. Command Cooldown
+Command cooldown
+Dev: STR1KE#6969
+
+17. Slowmode
+Adds slowmode
+Dev: STR1KE#6969
+
+18. check if arguments are none
+If arguments are none then the nodes after the mod wont be called
+Dev: STR1KE#6960
+
+19. Delete Role from Server
+Deletes a defined role from Server
+Dev: 【qizzle】#9271
+
+20. CheckRoleID
 Adds ability to check if the command was sent by someone with a specific role.
 Dev: Big D#1129
