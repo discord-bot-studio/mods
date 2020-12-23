@@ -75,12 +75,17 @@ Dev: STR1KE#6969
 
 18. check if arguments are none
 If arguments are none then the nodes after the mod wont be called
+<<<<<<< HEAD
 Dev: STR1KE#6969
 
-19. Edit Msg
+19. Delete Role from Server
+Deletes a defined role from Server
+Dev: 【qizzle】#9271
+
+20. Edit Msg
 Sends a message that will get edited after a delay
 Dev: STR1KE#6969
 
-20. Edit Embed
+21. Edit Embed
 Sends an Embed Message that will get edited after a delay
 Dev: STR1KE#6969
