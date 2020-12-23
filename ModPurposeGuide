@@ -76,3 +76,7 @@ Dev: STR1KE#6969
 18. check if arguments are none
 If arguments are none then the nodes after the mod wont be called
 Dev: STR1KE#6960
+
+19. Delete Role from Server
+Deletes a defined role from Server
+Dev: 【qizzle】#9271
