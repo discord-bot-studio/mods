@@ -89,3 +89,7 @@ Dev: STR1KE#6969
 21. Edit Embed
 Sends an Embed Message that will get edited after a delay
 Dev: STR1KE#6969
+
+22. Nickname
+Changes the nickname of the person who ran the command
+Dev: STR1KE#4115
