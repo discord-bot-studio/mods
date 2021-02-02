@@ -12,7 +12,7 @@ module.exports = {
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
     changelog: "Created Send Message ~ Great Plains Modding",
 
-    // Set this to true if this will be an event.
+    // Set this to true if this will be an event. Note events wont show up in DBS.
     isEvent: false,
     
     isResponse: true,
@@ -51,6 +51,8 @@ module.exports = {
 
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
+
+        // Note DBS stores all data from the HTML field into lowercase. messageText = messagetext
         switch (action.channelname) {
             case "sameChannel":
                 message.channel.send(action.messagetext);
@@ -62,5 +64,8 @@ module.exports = {
                 message.mentions.first().send(action.messagetext);
                 break;
         }
+
+        // Remember to use callNextAction or the bot wont continue any actions after this mod.
+        DBS.callNextAction(command, message, args, index + 1);
     }
 };
