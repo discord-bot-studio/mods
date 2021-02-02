@@ -49,7 +49,6 @@ module.exports = {
         const youtube = require('scrape-youtube').default;
         const video = (await youtube.search(DBS.BetterMods.parseAction(action.searchquery, message))).videos[0];
         DBS.Cache[message.guild.id].variables[action.varname] = video.link;
-        
         DBS.callNextAction(command, message, args, index + 1);
     }
 };

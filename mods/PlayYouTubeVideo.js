@@ -68,12 +68,15 @@ module.exports = {
                 if (songInfo) {
                     const connection = await voiceChannel.join();
                     const stream = ytdl(songInfo.videoDetails.video_url);
-                    DBS.Cache[message.guild.id].dispatcher = await connection.play(stream).on("finish", () => {}).on("error", error => message.channel.send("Error! " + error.name + " " + error.message));
+                    DBS.Cache[message.guild.id].dispatcher = await connection.play(stream).on("finish", () => { 
+                        DBS.Cache[message.guild.id].dispatcher.destroy();
+                    }).on("error", error => message.channel.send("Error! " + error.name + " " + error.message));
+
                     DBS.Cache[message.guild.id].dispatcher.setVolumeLogarithmic(1);
                     DBS.Cache[message.guild.id].variables[action.storesongname] = songInfo.videoDetails.title;
 
-                    if (action.onsuccess != "") return DBS.callNextAction(command, message, args, action.onsuccess);
-                } else if (action.onError != "") return DBS.callNextAction(command, message, args, action.onerror);
+                    if (action.onsuccess != "") return DBS.callNextAction(command, message, args, parseInt(action.onsuccess));
+                } else if (action.onError != "") return DBS.callNextAction(command, message, args, parseInt(action.onerror));
             };
         } else message.channel.send("Invalid URL Variable");
 

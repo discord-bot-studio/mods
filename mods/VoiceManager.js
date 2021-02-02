@@ -1,7 +1,7 @@
 module.exports = {
     // Set this to the name of the mod. This is what will be shown inside of Discord Bot Studio.
     // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
-    name: "Stop Action",
+    name: "Voice Manager",
 
     // Place the author of the mod here. This is an array so you can add other authors by writing ["Great Plains Modding", "New User"]
     author: ["Discord Bot Studio"],
@@ -10,7 +10,7 @@ module.exports = {
     version: "1.0.0",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
-    changelog: "Created Stop Action ~ Great Plains Modding",
+    changelog: "Created Play YouTube Video ~ Great Plains Modding",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -29,17 +29,40 @@ module.exports = {
     // Place your html to show inside of Discord Bot Studio when they select your mod.
     html: function(data) {
         return `
-            <b>Remember to click save or this node wont work!</b>
+            <div class="form-group">
+                <label>Get *</label>
+                <select name="info" class="form-control">
+                    <option value="isAuthorInVC">Is Author In Voice Channel</option>
+                </select><br>
+
+                <div class="row">
+                    <div class="col">
+                        <label>If True Jump To Node *</label>
+                        <input class="form-control" name="ifTrue"></input><br>
+                    </div>
+
+                    <div class="col">
+                        <label>If False Jump To Node *</label>
+                        <input class="form-control" name="ifFalse"></input><br>
+                    </div>
+                </div>
+            </div>
         `;
     },
 
     // When the bot is first started, this code will be ran.
     init: function() {
-        console.log("Loaded Stop Action");
+        console.log("Loaded VoiceManager.js");
     },
 
     // Place your mod here.
     mod: async function(DBS, message, action, args, command, index) {
-        // This mod has to many lines of code
+        switch(action.info) {
+            case "isAuthorInVC":
+                if (message.member.voice.channel) {
+                    DBS.callNextAction(command, message, args, parseInt(action.iftrue));
+                } else DBS.callNextAction(command, message, args, parseInt(action.iffalse));
+            break
+        }
     }
 };
