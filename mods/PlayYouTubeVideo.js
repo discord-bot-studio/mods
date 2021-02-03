@@ -51,8 +51,12 @@ module.exports = {
 
                 <div class="row">
                     <div class="col">
-                        <label>Success (Node ID)</label>
+                        <label>On Song Started (Node ID)</label>
                         <input class="form-control" name="onSuccess"></input><br>
+                    </div>
+                    <div class="col">
+                        <label>On Song Finished (Node ID)</label>
+                        <input class="form-control" name="onFinish"></input><br>
                     </div>
                     <div class="col">
                         <label>Invalid URL (Node ID)</label>
@@ -95,6 +99,7 @@ module.exports = {
                     DBS.Cache[message.guild.id].dispatcher = await connection.play(stream).on("finish", () => { 
                         DBS.Cache[message.guild.id].dispatcher.destroy();
                         DBS.Cache[message.guild.id].dispatcher = undefined;
+                        if (action.onfinish != "") return DBS.callNextAction(command, message, args, parseInt(action.onfinish))
                     }).on("error", error => message.channel.send("Error! " + error.name + " " + error.message));
 
                     DBS.Cache[message.guild.id].dispatcher.setVolumeLogarithmic(1);
