@@ -1,7 +1,7 @@
 module.exports = {
     // Set this to the name of the mod. This is what will be shown inside of Discord Bot Studio.
     // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
-    name: "Get YouTube Video",
+    name: "Bot Info",
 
     // Place the author of the mod here. This is an array so you can add other authors by writing ["Great Plains Modding", "New User"]
     author: ["Discord Bot Studio"],
@@ -10,7 +10,7 @@ module.exports = {
     version: "1.0.0",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
-    changelog: "Get YouTube Video ~ Great Plains Modding",
+    changelog: "Created Play YouTube Video ~ Great Plains Modding",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -30,8 +30,15 @@ module.exports = {
     html: function(data) {
         return `
             <div class="form-group">
-                <label>Search Query *</label>
-                <input class="form-control" name="searchQuery"></input><br>
+                <label>Get *</label>
+                <select name="info" class="form-control">
+                    <option value="clientGuildCount">Client Guild Count</option>
+                    <option value="clientPing">Client Ping</option>
+                    <option value="clientUptimeSeconds">Client Uptime (Seconds)</option>
+                    <option value="clientUptimeMinutes">Client Uptime (Minutes)</option>
+                    <option value="clientUptimeHours">Client Uptime (Hours)</option>
+                    <option value="clientUptimeDays">Client Uptime (Days)</option>
+                </select><br>
 
                 <div class="row">
                     <div class="col">
@@ -53,16 +60,33 @@ module.exports = {
     },
 
     // When the bot is first started, this code will be ran.
-    init: function(DBS) {
-        console.log("Loaded GetYouTubeVideo");
-        DBS.BetterMods.requireModule("scrape-youtube")
+    init: function() {
+        console.log("Loaded send message");
     },
 
     // Place your mod here.
     mod: async function(DBS, message, action, args, command, index) {
-        const youtube = DBS.BetterMods.requireModule('scrape-youtube').default;
-        const video = (await youtube.search(DBS.BetterMods.parseAction(action.searchquery, message))).videos[0];
-        DBS.BetterMods.saveVar(action.vartype, action.storeresult, video.link, message.guild)
+        switch(action.info) {
+            case "clientGuildCount":
+                DBS.BetterMods.saveVar(action.vartype, action.storeresult, DBS.Bot.guilds.size, message.guild)
+            break
+            case "clientPing":
+                DBS.BetterMods.saveVar(action.vartype, action.storeresult, DBS.Bot.ws.ping, message.guild)
+            break
+            case "clientUptimeSeconds":        
+                DBS.BetterMods.saveVar(action.vartype, action.storeresult, Math.floor(DBS.Bot.uptime / 1000) % 60, message.guild)
+            break
+            case "clientUptimeMinutes":
+                DBS.BetterMods.saveVar(action.vartype, action.storeresult, Math.floor(DBS.Bot.uptime / 60000) % 60, message.guild)
+            break
+            case "clientUptimeHours":
+                DBS.BetterMods.saveVar(action.vartype, action.storeresult, Math.floor(DBS.Bot.uptime / 3600000) % 24, message.guild)
+            break
+            case "clientUptimeDays":
+                DBS.BetterMods.saveVar(action.vartype, action.storeresult, Math.floor(DBS.Bot.uptime / 86400000), message.guild)
+            break
+        }
+
         DBS.callNextAction(command, message, args, index + 1);
     }
 };

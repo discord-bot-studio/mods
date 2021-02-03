@@ -1,5 +1,3 @@
-const { Guild, Client } = require("discord.js");
-
 module.exports = {
     // Set this to the name of the mod. This is what will be shown inside of Discord Bot Studio.
     // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED

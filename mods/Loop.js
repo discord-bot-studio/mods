@@ -50,9 +50,8 @@ module.exports = {
         // counting each second as 1.1 because otherwise it stops itself
         var delay = action.timedelay * 1100;
 
-setTimeout(function() {
-    DBS.callNextAction(command, message, args, index - action.nodes);
-    console.log("Traveled" + action.nodes + "nodes back")
-}, delay);
+        setTimeout(function() {
+            DBS.callNextAction(command, message, args, parseInt(index - action.nodes));
+        }, delay);
     }
 };

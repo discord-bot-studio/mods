@@ -34,9 +34,35 @@ module.exports = {
 
     // When the bot is first started, this code will be ran.
     init: function(DBS) {
-        console.log("Loaded Better Mods");
+        const { join } = require("path")
+        const { execSync } = require("child_process")
 
         DBS.BetterMods = {};
+        DBS.BetterMods.Logger = {
+            error: (msg) => console.log('\x1b[31m' + msg, '\x1b[0m'),
+            success: (msg) => console.log('\x1b[32m' + msg, '\x1b[0m'),
+            warn: (msg) => console.log('\x1b[33m' + msg, '\x1b[0m')
+        };
+
+        DBS.BetterMods.requireModule = async function(packageName) {
+            try {
+                const modulePath = join(__dirname, "../node_modules", packageName);
+                return require(modulePath);
+            } catch (e) {
+                DBS.BetterMods.Logger.warn(`[DBS Module Installer] - Installing ${packageName}`);
+
+                const cliCommand = 'npm install ' + packageName + ' --save';
+                await execSync(cliCommand, {
+                    cwd: join(__dirname),
+                    stdio: [0, 1, 2]
+                });
+
+                DBS.BetterMods.Logger.warn(`[DBS Module Installer] - Successfully Installed ${packageName}. Note you may need to restart your bot.`);
+                const modulePath = join(__dirname, "../node_modules", packageName);
+                return require(modulePath);
+            };
+        };
+
         DBS.BetterMods.parseAction = function(string, msg) {
             let newVal = string;
 

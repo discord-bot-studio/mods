@@ -65,8 +65,13 @@ module.exports = {
     },
 
     // When the bot is first started, this code will be ran.
-    init: function() {
+    init: function(DBS) {
         console.log("Loaded send message");
+        DBS.BetterMods.requireModule('ytdl-core');
+        DBS.BetterMods.requireModule("ffmpeg-static");
+        DBS.BetterMods.requireModule("ffmpeg");
+        DBS.BetterMods.requireModule("fluent-ffmpeg");
+        DBS.BetterMods.requireModule("@discordjs/opus");
     },
 
     // Place your mod here.
@@ -74,7 +79,7 @@ module.exports = {
         const url = DBS.BetterMods.parseAction(action.songurl, message);
 
         if (url) {
-            const ytdl = require('ytdl-core');
+            const ytdl = DBS.BetterMods.requireModule('ytdl-core');
 
             const voiceChannel = message.member.voice.channel;
             let songInfo = undefined;

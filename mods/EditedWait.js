@@ -51,7 +51,6 @@ module.exports = {
 
             if (!isNaN(Number(action.seconds))) {
                 var milliseconds = Number(action.seconds) * 1000;
-                console.log('Wating for ' + action.seconds + ' second(s)')
                 await timer(milliseconds);
                 
                 // Must call this, or the rest of the response sequence will not run
