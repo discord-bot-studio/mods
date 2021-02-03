@@ -33,14 +33,33 @@ module.exports = {
                 <label>YouTube URL *</label>
                 <input class="form-control" name="songURL"></input><br>
 
-                <label>Store Song Name (Temp Var) *</label>
-                <input class="form-control" name="storeSongName"></input><br>
+                <div class="row">
+                    <div class="col">
+                        <label>Variable Type *</label>
+                        <select name="varType" class="form-control">
+                            <option value="temp">Temp Variable</option>
+                            <option value="server">Server Variable</option>
+                            <option value="global">Global Variable</option>
+                        </select><br>
+                    </div>
 
-                <label>Success (Node ID)*</label>
-                <input class="form-control" name="onSuccess"></input><br>
+                    <div class="col">
+                        <label>Variable Name *</label>
+                        <input class="form-control" name="storeResult"></input><br>
+                    </div>
+                </div>
 
-                <label>Invalid URL (Node ID) *</label>
-                <input class="form-control" name="onError"></input>
+                <div class="row">
+                    <div class="col">
+                        <label>Success (Node ID)</label>
+                        <input class="form-control" name="onSuccess"></input><br>
+                    </div>
+                    <div class="col">
+                        <label>Invalid URL (Node ID)</label>
+                        <input class="form-control" name="onError"></input>
+                    </div>
+                </div><br>
+                <p>Having issues? Make sure you are running in CMD and have installed the correct node_modules <code>ffmpeg-static ffmpeg fluent-ffmpeg @discordjs/opus ytdl-core</code> in your bot folder.</p>
             </div>
         `;
     },
@@ -70,10 +89,11 @@ module.exports = {
                     const stream = ytdl(songInfo.videoDetails.video_url);
                     DBS.Cache[message.guild.id].dispatcher = await connection.play(stream).on("finish", () => { 
                         DBS.Cache[message.guild.id].dispatcher.destroy();
+                        DBS.Cache[message.guild.id].dispatcher = undefined;
                     }).on("error", error => message.channel.send("Error! " + error.name + " " + error.message));
 
                     DBS.Cache[message.guild.id].dispatcher.setVolumeLogarithmic(1);
-                    DBS.Cache[message.guild.id].variables[action.storesongname] = songInfo.videoDetails.title;
+                    DBS.BetterMods.saveVar(action.vartype, action.storeresult, songInfo.videoDetails.title, message.guild)
 
                     if (action.onsuccess != "") return DBS.callNextAction(command, message, args, parseInt(action.onsuccess));
                 } else if (action.onError != "") return DBS.callNextAction(command, message, args, parseInt(action.onerror));

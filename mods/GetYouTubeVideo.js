@@ -33,8 +33,21 @@ module.exports = {
                 <label>Search Query *</label>
                 <input class="form-control" name="searchQuery"></input><br>
 
-                <label>Variable Name (TempVar) *</label>
-                <input class="form-control" name="varName"></input>
+                <div class="row">
+                    <div class="col">
+                        <label>Variable Type *</label>
+                        <select name="varType" class="form-control">
+                            <option value="temp">Temp Variable</option>
+                            <option value="server">Server Variable</option>
+                            <option value="global">Global Variable</option>
+                        </select><br>
+                    </div>
+
+                    <div class="col">
+                        <label>Variable Name *</label>
+                        <input class="form-control" name="storeResult"></input><br>
+                    </div>
+                </div>
             </div>
         `;
     },
@@ -48,7 +61,7 @@ module.exports = {
     mod: async function(DBS, message, action, args, command, index) {
         const youtube = require('scrape-youtube').default;
         const video = (await youtube.search(DBS.BetterMods.parseAction(action.searchquery, message))).videos[0];
-        DBS.Cache[message.guild.id].variables[action.varname] = video.link;
+        DBS.BetterMods.saveVar(action.vartype, action.storeresult, video.link, message.guild)
         DBS.callNextAction(command, message, args, index + 1);
     }
 };

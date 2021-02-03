@@ -31,11 +31,15 @@ module.exports = {
         return `
             <div class="form-group">
                 <label>Get *</label>
-                <select name="info" class="form-control">
+                <select name="info" id="info" class="form-control" required>
                     <option value="isAuthorInVC">Is Author In Voice Channel</option>
+                    <option value="IsBotPlayingSong">Is Bot Playing Song</option>
+                    <option value="leaveVC">Leave Voice Channel</option>
+                    <option value="voiceVolume">Set Voice Volume</option>
+                    <option value="stopPlaying">Stop Playing</option>
                 </select><br>
 
-                <div class="row">
+                <div class="row" id="trueFalse">
                     <div class="col">
                         <label>If True Jump To Node *</label>
                         <input class="form-control" name="ifTrue"></input><br>
@@ -46,7 +50,39 @@ module.exports = {
                         <input class="form-control" name="ifFalse"></input><br>
                     </div>
                 </div>
+
+                <div id="volumeField">
+                    <label>Volume *</label>
+                    <input class="form-control" name="volume"></input><br>
+                </div>
             </div>
+
+            <script>
+                $(function() {
+                    $("#trueFalse").hide();
+                    $("#volumeField").hide()
+
+
+                    check()
+                    $('#info').change(() => {
+                        check()
+                    });
+                })
+
+                function check() {
+                    if ($('#info').val() == "isAuthorInVC" || $("#info").val() == "IsBotPlayingSong") {
+                        $("#trueFalse").show()
+                    } else {
+                        $("#trueFalse").hide()
+                    }
+
+                    if ($('#info').val() == "voiceVolume") {
+                        $("#volumeField").show()
+                    } else {
+                        $("#volumeField").hide()
+                    }
+                }
+            </script>
         `;
     },
 
@@ -62,6 +98,24 @@ module.exports = {
                 if (message.member.voice.channel) {
                     DBS.callNextAction(command, message, args, parseInt(action.iftrue));
                 } else DBS.callNextAction(command, message, args, parseInt(action.iffalse));
+            break
+            case "IsBotPlayingSong":
+                if (DBS.Cache[message.guild.id].dispatcher) {
+                    DBS.callNextAction(command, message, args, parseInt(action.iftrue));
+                } else DBS.callNextAction(command, message, args, parseInt(action.iffalse));
+            break
+            case "leaveVC":
+                message.member.voice.channel.leave()
+                DBS.callNextAction(command, message, args, index + 1);
+            break
+            case "voiceVolume":
+                DBS.Cache[message.guild.id].dispatcher.setVolumeLogarithmic(parseInt(DBS.BetterMods.parseAction(action.volume, message)) / 100);
+                DBS.callNextAction(command, message, args, index + 1);
+            break
+            case "stopPlaying":
+                DBS.Cache[message.guild.id].dispatcher.destroy();
+                DBS.Cache[message.guild.id].dispatcher = undefined;
+                DBS.callNextAction(command, message, args, index + 1);
             break
         }
     }
