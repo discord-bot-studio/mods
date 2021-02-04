@@ -60,7 +60,7 @@ module.exports = {
 
     // Place your mod here.
     mod: async function(DBS, message, action, args, command, index) {
-        const youtube = DBS.BetterMods.requireModule('scrape-youtube').default;
+        const youtube = require('scrape-youtube').default;
         const video = (await youtube.search(DBS.BetterMods.parseAction(action.searchquery, message))).videos[0];
         DBS.BetterMods.saveVar(action.vartype, action.storeresult, video.link, message.guild)
         DBS.callNextAction(command, message, args, index + 1);

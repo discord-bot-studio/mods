@@ -1,7 +1,7 @@
 module.exports = {
     // Set this to the name of the mod. This is what will be shown inside of Discord Bot Studio.
     // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
-    name: "Play YouTube Video",
+    name: "Get YouTube Video Info",
 
     // Place the author of the mod here. This is an array so you can add other authors by writing ["Great Plains Modding", "New User"]
     author: ["Discord Bot Studio"],
@@ -30,8 +30,24 @@ module.exports = {
     html: function(data) {
         return `
             <div class="form-group">
-                <label>YouTube URL *</label>
+                <label>YouTube Video URL *</label>
                 <input class="form-control" name="songURL"></input><br>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Get *</label>
+                        <select class="form-control" name="fetchType">
+                            <option value="videoURL">Video Title</option>
+                            <option value="videoDescription">Video Description</option>
+                            <option value="videoThumbnail">Video Thumbnail</option>
+                            <option value="videoLength">Video Length</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Invalid URL (Node ID)</label>
+                        <input class="form-control" name="onError"></input><br>
+                    </div>
+                </div><br>
 
                 <div class="row">
                     <div class="col">
@@ -48,22 +64,6 @@ module.exports = {
                         <input class="form-control" name="storeResult"></input><br>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col">
-                        <label>On Song Started (Node ID)</label>
-                        <input class="form-control" name="onSuccess"></input><br>
-                    </div>
-                    <div class="col">
-                        <label>On Song Finished (Node ID)</label>
-                        <input class="form-control" name="onFinish"></input><br>
-                    </div>
-                    <div class="col">
-                        <label>Invalid URL (Node ID)</label>
-                        <input class="form-control" name="onError"></input>
-                    </div>
-                </div><br>
-                <p>Having issues? Make sure you are running in CMD and have installed the correct node_modules <code>ffmpeg-static ffmpeg fluent-ffmpeg @discordjs/opus ytdl-core</code> in your bot folder.</p>
             </div>
         `;
     },
@@ -72,10 +72,6 @@ module.exports = {
     init: function(DBS) {
         console.log("Loaded send message");
         DBS.BetterMods.requireModule('ytdl-core');
-        DBS.BetterMods.requireModule("ffmpeg-static");
-        DBS.BetterMods.requireModule("ffmpeg");
-        DBS.BetterMods.requireModule("fluent-ffmpeg");
-        DBS.BetterMods.requireModule("@discordjs/opus");
     },
 
     // Place your mod here.
@@ -85,31 +81,30 @@ module.exports = {
         if (url) {
             const ytdl = await DBS.BetterMods.requireModule('ytdl-core');
 
-            const voiceChannel = message.member.voice.channel;
             let songInfo = undefined;
 
-            if (voiceChannel) {                
-                try {
-                    songInfo = await ytdl.getInfo(url);
-                } catch (error) {};
+            try {
+                songInfo = await ytdl.getInfo(url);
+            } catch (error) {};
 
-                if (songInfo) {
-                    const connection = await voiceChannel.join();
-                    const stream = ytdl(songInfo.videoDetails.video_url);
-                    DBS.Cache[message.guild.id].dispatcher = await connection.play(stream).on("finish", () => { 
-                        DBS.Cache[message.guild.id].dispatcher.destroy();
-                        DBS.Cache[message.guild.id].dispatcher = undefined;
-                        if (action.onfinish != "") return DBS.callNextAction(command, message, args, parseInt(action.onfinish))
-                    }).on("error", error => message.channel.send("Error! " + error.name + " " + error.message));
-
-                    DBS.Cache[message.guild.id].dispatcher.setVolumeLogarithmic(1);
-                    DBS.BetterMods.saveVar(action.vartype, action.storeresult, songInfo.videoDetails.title, message.guild)
-
-                    if (action.onsuccess != "") return DBS.callNextAction(command, message, args, parseInt(action.onsuccess));
-                } else if (action.onError != "") return DBS.callNextAction(command, message, args, parseInt(action.onerror));
-            };
+            if (songInfo) {
+                switch(action.fetchtype) {
+                    case "videoURL":
+                        DBS.BetterMods.saveVar(action.vartype, action.storeresult, songInfo.videoDetails.video_url, message.guild);
+                    break
+                    case "videoDescription":
+                        DBS.BetterMods.saveVar(action.vartype, action.storeresult, songInfo.videoDetails.description, message.guild);
+                    break
+                    case "videoThumbnail":
+                        DBS.BetterMods.saveVar(action.vartype, action.storeresult, songInfo.videoDetails.thumbnails[0].url, message.guild);
+                    break
+                    case "videoLength":
+                        DBS.BetterMods.saveVar(action.vartype, action.storeresult, songInfo.videoDetails.lengthSeconds, message.guild);
+                    break
+                }
+            } else if (action.onError != "") return DBS.callNextAction(command, message, args, parseInt(action.onerror));
+    
         } else message.channel.send("Invalid URL Variable");
-
         DBS.callNextAction(command, message, args, index + 1);
     }
 };
