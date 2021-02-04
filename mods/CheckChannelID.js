@@ -31,11 +31,10 @@ module.exports = {
         return `
             <div class="form-group">
                 <label>The ID of the channel you want the command to work in *</label>
-                <textarea class="form-control needed-field" name="channelid" rows="1" ></textarea>
-            </div>
-            <div class="form-group">
-                <label>Incorrect channel message *</label>
-                <textarea rows="2" class="form-control needed-field" name="nomatch"></textarea>
+                <input class="form-control" name="channelid"></input>
+
+                <label>Incorrect Channel - Jump To (Node ID)</label>
+                <input class="form-control" name="onError"></input>
             </div>
         `;
     },
@@ -47,17 +46,11 @@ module.exports = {
 
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
-        var channelID = action.channelid;
-        var NoMatch = action.nomatch;
 
-        if (message.channel.id === channelID) {
+        if (message.channel.id === action.channelid) {
             DBS.callNextAction(command, message, args, index + 1)
-
         } else {
-            
-            if (NoMatch) {
-                message.channel.send(NoMatch)
-            }
+            if (action.onerror != "") DBS.callNextAction(command, message, args, parseInt(action.onerror))
         }
     }
 };

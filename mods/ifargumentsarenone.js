@@ -1,16 +1,16 @@
 module.exports = {
     // Set this to the name of the mod. This is what will be shown inside of Discord Bot Studio.
     // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
-    name: "Ping Message",
+    name: "if arguments are none",
 
     // Place the author of the mod here. This is an array so you can add other authors by writing ["Great Plains Modding", "New User"]
-    author: ["Vannzilla#5260"],
+    author: ["STR1KE#6969"],
 
     // Place the version of the mod here.
     version: "0.1.0",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
-    changelog: "Added ping message",
+    changelog: "nothing",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -30,24 +30,23 @@ module.exports = {
     html: function(data) {
         return `
             <div class="form-group">
-                <label>Ping message use $$ping$$ to insert ping *</label>
-                <textarea class="form-control needed-field" name="pingMessage" rows="3" ></textarea>
+                <label>On No Arguments Provided - Jump To (Node ID)</label>
+                <input class="form-control" name="noArgs"></input>
             </div>
         `;
     },
 
     // When the bot is first started, this code will be ran.
     init: function() {
-        console.log("Loaded ping message mod");
+        console.log("Loaded Arguments");
     },
 
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
-        var pingMsg = (action.pingmessage)
-        var ping = Date.now() - message.createdTimestamp + " ms";
-        pingMsg = pingMsg.replace("$$ping$$", ping)
-        message.channel.send(pingMsg);
-
-        DBS.callNextAction(command, message, args, index + 1);
+        if (args == "") {
+            DBS.callNextAction(command, message, args, parseInt(action.noargs));
+        } else if (!args == "") {
+            DBS.callNextAction(command, message, args, index + 1);
+        }
     }
 };
