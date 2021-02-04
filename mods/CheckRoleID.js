@@ -34,8 +34,8 @@ module.exports = {
                 <textarea class="form-control needed-field" name="roleid" rows="1" ></textarea>
             </div>
             <div class="form-group">
-                <label>Send message if user doesn't have role *</label>
-                <textarea rows="2" class="form-control needed-field" name="blacklisted"></textarea>
+                <label>Send message if user doesn't have role</label>
+                <textarea rows="2" class="form-control" name="blacklisted"></textarea>
             </div>
         `;
     },
