@@ -84,3 +84,22 @@ Dev: 【qizzle】#9271
 20. CheckRoleID
 Adds ability to check if the command was sent by someone with a specific role.
 Dev: Big D#1129
+
+21. Change Server Name
+Changes the Name of the Server
+Dev: aoe#4851
+
+22. Change Server Region
+Changes the Region of the Server
+Dev: aoe#4851
+
+23. Change Server Icon 
+Changes the Icon of the Server 
+Dev: aoe#4851
+
+24. Leave Server 
+Ability to let the Bot Leave the Server
+Dev: aoe#4851
+
+25. Emoji
+Creates a New Emoji 
