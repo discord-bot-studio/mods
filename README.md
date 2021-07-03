@@ -26,7 +26,7 @@ DBS.BetterMods.getVar("types", "varName", guild)
 
 // Parsing Data
 // types ("temp", "server", "global")
-DBS.BetterMods.getVar(string, message) // replaces stuff like ${tempVars.myVar} with the data
+DBS.BetterMods.parseAction(string, message) // replaces stuff like ${tempVars.myVar} with the data
 ```
 
 ## Responses
