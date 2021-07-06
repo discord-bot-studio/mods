@@ -108,3 +108,11 @@ Dev: aoe#4851
 26. GetInviteCount
 Gets the Invite Count from the Message Author and saves it into a var
 Dev: aoe#4851
+
+27. MessageReply
+Normal Message Reply
+Dev: aoe#4851
+
+28. Embed Reply
+Embed Message Reply
+Dev: aoe#4851
