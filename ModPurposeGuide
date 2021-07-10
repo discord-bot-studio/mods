@@ -120,3 +120,7 @@ Dev: aoe#4851
 29. Random User
 Gets a random User from a reaction
 Dev: aoe#4851
+
+30. CreateCategory
+Creates a Category
+Dev: aoe#4851
