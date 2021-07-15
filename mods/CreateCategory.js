@@ -10,17 +10,22 @@ module.exports = {
     section: "Channel Action",
     html: function(data) {
         return `
-        <div class="form-group">
-            <label>The Category Name *</label>
-            <textarea class="form-control needed-field" name="name" rows="1" ></textarea>
-        </div>
+     </div>
+       <div class="col">
+        <label>The Category Name *</label>
+         <div class="input-group mb-3">
+         <input class="form-control needed-field" name="name"></input><br>
+        <div class="input-group-append">
+      <a class="btn btn-outline-primary" role="button" id="variables" forinput="name">Insert Variable</a>
+    </div>
+  </div>
         `;
     },
     init: function() {
         console.log("Loaded CreateCategory Mod ~ aoe#4851");
     },
     mod: function(DBS, message, action, args, command, index) {
-    message.guild.channels.create(action.name, { type: 'category' });
+    message.guild.channels.create(DBS.BetterMods.parseAction(action.name, message), { type: 'category' });
     DBS.callNextAction(command, message, args, index + 1);
   }
 };
