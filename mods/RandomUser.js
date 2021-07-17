@@ -16,7 +16,7 @@ module.exports = {
 	<div class="input-group mb-3">
       <input class="form-control needed-field" name="msgid"></input><br>
         <div class="input-group-append">
-            <a class="btn btn-outline-primary" role="button" id="variables" forinput="roleedit">Insert Variable</a>
+            <a class="btn btn-outline-primary" role="button" id="variables" forinput="msgid">Insert Variable</a>
         </div>
   </div>
 </div>
@@ -26,7 +26,7 @@ module.exports = {
        <div class="input-group mb-3">
       <input class="form-control needed-field" name="emojiid"></input><br>
       <div class="input-group-append">
-      <a class="btn btn-outline-primary" role="button" id="variables" forinput="roleedit">Insert Variable</a>
+      <a class="btn btn-outline-primary" role="button" id="variables" forinput="emojiid">Insert Variable</a>
     </div>
   </div>
 </div>
