@@ -126,6 +126,6 @@ Dev: aoe#4851
 Gets the mentioned Role
 Dev: Pokemonultra#2815
 
-• Get Mentioned Role
+• CreateGuildInvite
 Creates a Guild Invite in the Command Channel
 Dev: aoe#4851
