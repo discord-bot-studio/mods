@@ -125,3 +125,7 @@ Dev: aoe#4851
 30. CreateCategory
 Creates a Category
 Dev: aoe#4851
+
+31. Get Mentioned Role
+Gets a mentioned Role
+Dev: Pokemonultra#2815
