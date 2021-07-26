@@ -7,7 +7,7 @@ module.exports = {
     isResponse: true,
     isMod: true,
     isAddon: false,
-    section: "Channel Action",
+    section: "Server Action",
     html: function(data) {
         return `
                 <div class="form-group">
