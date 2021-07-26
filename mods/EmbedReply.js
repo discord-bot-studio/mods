@@ -1,5 +1,5 @@
 module.exports = {
-    name: "EmbedReply",
+    name: "Embed Reply",
     author: ["aoe#4851"],
     version: "0.0.1",
     changelog: "Added EmbedReply Mod ~ aoe#4851",

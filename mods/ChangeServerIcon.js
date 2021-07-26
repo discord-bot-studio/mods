@@ -1,5 +1,5 @@
 module.exports = {
-    name: "ChangeServerIcon",
+    name: "Change Server Icon",
     author: ["aoe#9022"],
     version: "1.0.0",
     changelog: "Added ChangeServerIcon Mod ~ aoe#9022",

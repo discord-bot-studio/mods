@@ -1,5 +1,5 @@
 module.exports = {
-    name: "GetInviteCount",
+    name: "Get Invite Count",
     author: ["aoe#4851"],
     version: "0.0.1",
     changelog: "Added GetInviteCount Mod ~ aoe#4851",

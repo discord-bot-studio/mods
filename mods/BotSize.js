@@ -1,16 +1,16 @@
 module.exports = {
     // Set this to the name of the mod. This is what will be shown inside of Discord Bot Studio.
     // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
-    name: "BotSize",
+    name: "Bot Size",
 
     // Place the author of the mod here. This is an array so you can add other authors by writing ["Great Plains Modding", "New User"]
-    author: ["Electraboss"],
+    author: ["Electraboss", "slithey"],
 
     // Place the version of the mod here.
-    version: "1.0.0",
+    version: "1.1.0",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
-    changelog: "Created Server Size Mod ~ Electraboss",
+    changelog: "Updated bot size ~ Slithey",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -44,7 +44,7 @@ module.exports = {
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
         var botSizeMessage = (action.bsm)
-        botSizeMessage = botSizeMessage.replace("$$BotSize$$", DBS.Bot.guilds.size)
+        botSizeMessage = botSizeMessage.replace("$$BotSize$$", DBS.Bot.guilds.cache.size)
         message.channel.send(botSizeMessage);
 
         DBS.callNextAction(command, message, args, index + 1);

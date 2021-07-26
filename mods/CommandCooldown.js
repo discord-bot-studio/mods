@@ -26,7 +26,7 @@ module.exports = {
     isAddon: false,
 
     // Here you can define where you want your mod to show up inside of Discord Bot Studio (what category in the dropdown when adding a response)
-    section: "Message",
+    section: "Bot Action",
 
     // Place your html to show inside of Discord Bot Studio when they select your mod. Each input/select field will be saved to commands.json based on the NAME
     // attribute, so each input must have a NAME attribute.

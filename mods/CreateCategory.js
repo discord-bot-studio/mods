@@ -1,5 +1,5 @@
 module.exports = {
-    name: "CreateCategory",
+    name: "Create Category",
     author: ["aoe#4851"],
     version: "1.0.0",
     changelog: "Added CreateCategory Mod ~ aoe#4851",

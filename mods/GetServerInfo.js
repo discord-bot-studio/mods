@@ -24,7 +24,7 @@ module.exports = {
     isAddon: false,
 
     // Here you can define where you want your mod to show up inside of Discord Bot Studio
-    section: "Message",
+    section: "Server Action",
 
     // Place your html to show inside of Discord Bot Studio when they select your mod.
     html: function(data) {

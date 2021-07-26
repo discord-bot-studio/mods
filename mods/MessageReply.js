@@ -1,5 +1,5 @@
 module.exports = {
-    name: "MessageReply",
+    name: "Message Reply",
     author: ["aoe#4851"],
     version: "0.0.1",
     changelog: "Added MessageReply Mod ~ aoe#4851",

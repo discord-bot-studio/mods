@@ -1,5 +1,5 @@
 module.exports = {
-    name: "CreateGuildInvite",
+    name: "Create Guild Invite",
     author: ["aoe#4851"],
     version: "0.0.1",
     changelog: "Added CreateGuildInvite Mod ~ aoe#4851",

@@ -1,5 +1,5 @@
 module.exports = {
-    name: "ChangeServerRegion",
+    name: "Change Server Region",
     author: ["aoe#9022"],
     version: "1.0.0",
     changelog: "Added ChangeServerregion Mod ~ aoe#9022",
