@@ -16,13 +16,14 @@ This repo serves to house mods for DBS. Please see example_mod.js to see how mod
 1. Download the example mod.
 2. Give your mod a name, version number, changelog, and category.
 3. Write your code.
-4. Test.
-5. Debug.
+4. Test your code.
+5. Debug your code.
+6. Use and/or share your mod!
 
 ##  To share your mod(s):
 1. Create a fork of this repository.
 2. Add your mod(s) to your fork.
-3. Update the README.md file in the mods folder to describe your mod.
+3. Update the README.md file in the mods folder to describe your mod. Please remember to place your mod under the correct category.
 4. Create a pull request and wait for it to get merged.
 5. If your pull request can't be merged you should be provided additional instructions.
 
