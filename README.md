@@ -1,7 +1,7 @@
 # Mods
 This repo serves to house mods for DBS. Please see example_mod.js to see how modding works in DBS. DBS does not hold responsibility for the content and effects of 3rd party mods you install.
 
-# To install mods:
+## To install mods:
 1. Download this repository by pressing "Code" then "Download ZIP" on the repo home page.
 ![download](https://i.imgur.com/qitbaBP.png)
 2. Locate the javascript (.js) file for the mod(s) you want to add inside the mods folder of this repo. 
@@ -11,8 +11,21 @@ This repo serves to house mods for DBS. Please see example_mod.js to see how mod
 6. Now open DBS (restart it if it was open already), and you will now be able to add responses of the type of mod(s) you added, just like any other response in DBS. 
 7. Done!
 
-
 # Development
+## To create a mod:
+1. Download the example mod.
+2. Give your mod a name, version number, changelog, and category.
+3. Write your code.
+4. Test.
+5. Debug.
+
+##  To share your mod(s):
+1. Create a fork of this repository.
+2. Add your mod(s) to your fork.
+3. Update the README.md file in the mods folder to describe your mod.
+4. Create a pull request and wait for it to get merged.
+5. If your pull request can't be merged you should be provided additional instructions.
+
 ## Variables
 How can I use variables in mods? Note this only works if you have BetterMods.js installed.
 ```js
