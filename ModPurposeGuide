@@ -129,3 +129,7 @@ Dev: Pokemonultra#2815
 • CreateGuildInvite
 Creates a Guild Invite in the Command Channel
 Dev: aoe#4851
+
+• SetPrefix
+Sets a Prefix Per Server
+Dev: aoe#4851
