@@ -10,10 +10,48 @@ module.exports = {
     section: "Bot Action",
     html: function(data) {
         return `
-        <b>The Command will take all arguments after the Command as the Prefix and will save it per Server!</b>
-        <hr>
-        <p>The Prefix you put in at the Setup Page is the default Prefix!</P>
-        <p>Make sure you are running in CMD!</p>
+    <div class="form-group">
+        <label>Action: *</label>
+        <select name="main" id="main" class="form-control" required>
+            <option value="setPrefix">Set the Prefix [Takes all Arguments and sets the Prefix for the Server]</option>
+            <option value="removePrefix">Remove the Prefix [Removes the Prefix from the Server]</option>
+            <option value="getPrefix">Save Prefix to Variabel [Saves the Server Prefix to a Variabel]</option>
+        </select><br>
+    </div>
+        <div class="row" id="vtype">
+        <div class="col">
+        <label>Variable Type *</label>
+        <select name="vartype" class="form-control">
+            <option value="temp">Temp Variable</option>
+            <option value="server">Server Variable</option>
+            <option value="global">Global Variable</option>
+        </select><br>
+    </div>
+    <div class="col">
+            <label>Variable Name *</label>
+            <input class="form-control" name="varname"></input><br>
+        </div>
+    </div>
+    <hr>
+    <p>The Prefix you put in at the Setup Page is the default Prefix!</P>
+    <p>Make sure you are running in CMD!</p>
+
+    <script>
+    $(function() {
+        $("#vtype").hide();
+        check()
+        $('#main').change(() => {
+            check()
+        });
+    })
+    function check() {
+        if ($('#main').val() == "getPrefix") {
+            $("#vtype").show()
+        } else {
+            $("#vtype").hide()
+        }
+    }
+    </script>
         `;
     },
     init: async function(DBS) {
@@ -32,7 +70,8 @@ module.exports = {
         process.send(`[SetPrefix Mod] Consider Running through CMD! ~ aoe#4851`)
             
         // Data which will write in a file. 
-        let data = `/* External Modules */
+        let data = `
+        /* External Modules */
         const Discord = require("discord.js");
         const fs = require("fs");
         const path = require("path");
@@ -376,7 +415,6 @@ module.exports = {
 
         // Overwrite by aoe#4851
         };`
-
         if (fs.existsSync("../bot.js")) {
             fs.unlinkSync("../bot.js")
         } else {
@@ -385,15 +423,41 @@ module.exports = {
             console.log(`[SetPrefix Mod] Re-/Replacing code in the bot.js file [Made by aoe#4851]`)
             if (!err == null) console.log(err);
         }) 
-      }
+        }
+        process.title = `${__dirname}`
         console.log('\x1b[33m' + '[SetPrefix Mod] If this is your first Time seeing this Message restart the Bot!', '\x1b[0m')
     },
     mod: function(DBS, message, action, args, command, index) {
         const prefix = require('discord-prefix');
-
-        const pref = args[0]
-        const guild = message.guild
-        prefix.setPrefix(`${pref}`, `${guild.id}`);
-        DBS.callNextAction(command, message, args, index + 1);
-    }
+        switch(action.main) {
+            case "setPrefix":
+                const pref = args[0]
+                const guild1 = message.guild
+                prefix.setPrefix(pref, guild1.id);
+                DBS.callNextAction(command, message, args, index + 1);
+            break
+            case "removePrefix":
+                const guild2 = message.guild
+                prefix.removePrefix(guild2.id)
+                DBS.callNextAction(command, message, args, index + 1);
+            break
+            case "getPrefix":
+                const guild = message.guild
+                const varName = action.varname
+                const gotPrefix = prefix.getPrefix(guild.id)
+                switch(action.vartype) {
+                    case "temp":
+                        DBS.Cache[guild.id].variables[varName] = gotPrefix;
+                    break
+                    case "server":
+                        DBS.serverVars[guild.id][varName] = gotPrefix;
+                    break
+                    case "global":
+                        DBS.globalVars[guild.id][varName] = gotPrefix;
+                    break
+                }
+                DBS.callNextAction(command, message, args, index + 1);
+            break
+                }
+        }
 };
