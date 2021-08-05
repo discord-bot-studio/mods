@@ -1,8 +1,8 @@
 module.exports = {
     name: "SetPrefix",
     author: ["aoe#4851"],
-    version: "1.0.0",
-    changelog: "Added SetPrefix Mod ~ aoe#4851",
+    version: "2.0.0",
+    changelog: "Updated SetPrefix Mod ~ aoe#4851",
     isEvent: false,
     isResponse: true,
     isMod: true,
