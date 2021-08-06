@@ -37,9 +37,9 @@ module.exports = {
                 <label>Variable Type *</label>
                 <div class="form-group">
                 <select class="form-control" name="varType">
-                    <option value="Temp" selected>Temp Variable</option>
-                    <option value="Server">Server Variable</option>
-                    <option value="Global">Global Variable</option>
+                    <option value="temp" selected>Temp Variable</option>
+                    <option value="server">Server Variable</option>
+                    <option value="global">Global Variable</option>
                 </select>
             </div>
         `;
@@ -53,20 +53,7 @@ module.exports = {
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
         const MRole = message.mentions.roles.map(r => r.name);
-        
-        switch (action.vartype) {
-            case "Temp":
-                DBS.BetterMods.saveVar("temp", action.varname, MRole, message.guild);
-                break;
-            case "Server":
-                DBS.BetterMods.saveVar("server", action.varname, MRole, message.guild);
-                break;
-            case "Global":
-                DBS.BetterMods.saveVar("global", action.varname, MRole, message.guild);
-                break;
-        }
-
-        
+        DBS.BetterMods.saveVar(action.varType, action.varname, MRole, message.guild);
         DBS.callNextAction(command, message, args, index + 1);
     }
 };
