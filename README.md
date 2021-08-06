@@ -18,7 +18,7 @@ How can I use variables in mods? Note this only works if you have BetterMods.js 
 ```js
 // Saving Data
 // types ("temp", "server", "global")
-DBS.saveVar("varType", "varName", "your data here", guild);
+DBS.BetterMods.saveVar("varType", "varName", "your data here", guild);
 
 // Fetching Data
 // types ("temp", "server", "global")
