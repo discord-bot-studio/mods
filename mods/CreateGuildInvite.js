@@ -29,7 +29,7 @@ module.exports = {
     init: function() {
         console.log("Loaded CreateGuildInvite Mod ~ aoe#4851");
     },
-    mod: function(DBS, message, action, args, command, index) {
+    mod: async function(DBS, message, action, args, command, index) {
         const invite = await message.channel.createInvite({unique: true})
         DBS.BetterMods.saveVar(action.vartype, action.varname, invite, message.guild);
         DBS.callNextAction(command, message, args, index + 1);
