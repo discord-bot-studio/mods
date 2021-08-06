@@ -10,30 +10,28 @@ module.exports = {
     section: "Channel Action",
     html: function(data) {
         return `
-                <div class="form-group">
-                    <label>Message when Invite Gets Created, Leave Blank for no Message(use $$code$$ to get the Invite Code) </label>
-                    <input class="form-control" name="msg" />
-                </div
+        <div class="row">
+            <div class="col">
+                <label>Variable Type *</label>
+                <select name="vartype" class="form-control">
+                    <option value="temp">Temp Variable</option>
+                    <option value="server">Server Variable</option>
+                    <option value="global">Global Variable</option>
+                </select><br>
+            </div>
+            <div class="col">
+                <label>Variable Name *</label>
+                <input class="form-control" name="varname"></input><br>
+            </div>
+        </div>
         `;
     },
     init: function() {
         console.log("Loaded CreateGuildInvite Mod ~ aoe#4851");
     },
     mod: function(DBS, message, action, args, command, index) {
-        let channel = message.channel;
-        channel.createInvite({unique: true})
-        .then(invite => { 
-           console.log(`New Invite Created in: ` + message.guild.name + `Code of Invites is:` + invite)
-           var invmsg = action.msg 
-           invmsg = invmsg.replace("$$code$$", invite.code);
-           if (invmsg == "") {
-            console.log("nothing")
-           }
-           else {
-           message.channel.send(invmsg)
-           }
-        })
-
+        const invite = await message.channel.createInvite({unique: true})
+        DBS.BetterMods.saveVar(action.vartype, action.varname, invite, message.guild);
         DBS.callNextAction(command, message, args, index + 1);
-        }
-    };
+    }
+};
