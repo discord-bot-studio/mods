@@ -55,7 +55,9 @@ module.exports = {
         `;
     },
     init: async function(DBS) {
+        const fs = require("fs");
         await DBS.BetterMods.requireModule("better-sqlite3");
+        const flatted = await DBS.BetterMods.requireModule("flatted");
         const pref = await DBS.BetterMods.requireModule('discord-prefix');
         console.log("Loaded SetPrefix Mod ~ aoe#9022");
 
@@ -86,29 +88,29 @@ module.exports = {
         
                         if (hasPermission && commandF.actions.length > 0) DBS.callNextAction(commandF, message, args, 0);
                     };
-        
-                    fs.writeFileSync(
-                        DBS.UserFile,
-                        JSON.stringify(DBS.usercache.memoryCache, null, 2),
-                        function (err) {
-                            if (err) return console.log(err);
-                        }
-                    );
-                    fs.writeFileSync(
-                        __dirname + "/BotData/variables/servervars.json",
-                        flatted.stringify(DBS.serverVars, null, 2),
-                        function (err) {
-                            if (err) return console.log(err);
-                        }
-                    );
-                    fs.writeFileSync(
-                        __dirname + "/BotData/variables/globalvars.json",
-                        flatted.stringify(DBS.globalVars, null, 2),
-                        function (err) {
-                            if (err) return console.log(err);
-                        }
-                    );
                 };
+
+                fs.writeFileSync(
+                    DBS.UserFile,
+                    JSON.stringify(DBS.usercache.memoryCache, null, 2),
+                    function (err) {
+                        if (err) return console.log(err);
+                    }
+                );
+                fs.writeFileSync(
+                    __dirname + "/../BotData/variables/servervars.json",
+                    flatted.stringify(DBS.serverVars, null, 2),
+                    function (err) {
+                        if (err) return console.log(err);
+                    }
+                );
+                fs.writeFileSync(
+                    __dirname + "/../BotData/variables/globalvars.json",
+                    flatted.stringify(DBS.globalVars, null, 2),
+                    function (err) {
+                        if (err) return console.log(err);
+                    }
+                );
             } catch (error) {
                 DBS.logError({
                     level: "error",

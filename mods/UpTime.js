@@ -32,9 +32,33 @@ module.exports = {
     html: function(data) {
         return `
         <div class="form-group">
-        <label>Send a message displaying the bot's uptime. Use $$seconds$$ $$minutes$$ $$hours$$ $$days$$* </label>
-        <textarea class="form-control needed-field" name="uptimemsg" rows="1" ></textarea>
-    </div>
+            <div class="row">
+                <div class="col">
+                    <label>Collect *</label>
+                    <select name="collectType" class="form-control">
+                        <option value="1">Seconds</option>
+                        <option value="2">Minutes</option>
+                        <option value="3">Hours</option>
+                        <option value="4">Days</option>
+                    </select><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Variable Type *</label>
+                    <select name="varType" class="form-control">
+                        <option value="temp">Temp Variable</option>
+                        <option value="server">Server Variable</option>
+                        <option value="global">Global Variable</option>
+                    </select><br>
+                </div>
+
+                <div class="col">
+                    <label>Variable Name *</label>
+                    <input class="form-control" name="varName"></input><br>
+                </div>
+            </div>
+        </div>
         `;
     },
 
@@ -44,18 +68,24 @@ module.exports = {
     },
 
     // Place your mod here.
-    mod: function(DBS, message, action, args, command, index) {
-        
-        var bottime = DBS.Bot.uptime;
-        var msg = action.uptimemsg;
+    mod: function(DBS, msg, action, args, command, index) {
+        const bottime = DBS.Bot.uptime;
+        console.log(action)
+        switch(action.collecttype) {
+            case "1":
+                DBS.BetterMods.saveVar(action.vartype, action.varname, Math.floor(bottime / 1000) % 60, msg.guild);
+            break
+            case "2":
+                DBS.BetterMods.saveVar(action.vartype, action.varname, Math.floor(bottime / 60000) % 60, msg.guild);
+            break
+            case "3":
+                DBS.BetterMods.saveVar(action.vartype, action.varname, Math.floor(bottime / 3600000) % 24, msg.guild);
+            break
+            case "4":
+                DBS.BetterMods.saveVar(action.vartype, action.varname, Math.floor(bottime / 86400000), msg.guild);
+            break
+        }
 
-        msg = msg.replace("$$seconds$$", Math.floor(bottime / 1000) % 60);
-        msg = msg.replace("$$minutes$$", Math.floor(bottime / 60000) % 60);
-        msg = msg.replace("$$hours$$", Math.floor(bottime / 3600000) % 24);
-        msg = msg.replace("$$days$$", Math.floor(bottime / 86400000));
-
-        message.channel.send(msg);
-
-        DBS.callNextAction(command, message, args, index + 1);
+        DBS.callNextAction(command, msg, args, index + 1);
     }
 };
