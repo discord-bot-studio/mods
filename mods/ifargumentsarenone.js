@@ -44,11 +44,7 @@ module.exports = {
 
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
-        if(args == ""){
-            message.channel.send(action.mes);
-        }else if(!args == "") {
-            DBS.callNextAction(command, message, args, index + 1);
-        }
-       
+        if (!args[0] && args[0] != "")  message.channel.send(action.mes);
+        DBS.callNextAction(command, message, args, index + 1);
     }
 };
