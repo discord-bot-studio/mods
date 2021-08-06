@@ -47,7 +47,7 @@ module.exports = {
 
     // When the bot is first started, this code will be ran.
     init: function() {
-        console.log("Loaded Get Mentioned Role\n|Contact me(Pokemonultra#2815) at any Problems");
+        console.log("Loaded Get Mentioned Role\n|Contact me(Pokemonultra#2815) for any Problems");
     },
 
     // Place your mod here.
