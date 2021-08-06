@@ -53,7 +53,7 @@ module.exports = {
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
         const MRole = message.mentions.roles.map(r => r.name);
-        DBS.BetterMods.saveVar(action.varType, action.varname, MRole, message.guild);
+        DBS.BetterMods.saveVar(action.vartype, action.varname, MRole, message.guild);
         DBS.callNextAction(command, message, args, index + 1);
     }
 };
