@@ -44,15 +44,9 @@ module.exports = {
 
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
-
-        const guild = message.guild;
-        const roleName = action.messagetext;
-
-        const role = guild.roles.cache.find((role) => {
-        return role.name === roleName;})
-        if (!role) {
-            return;
-        }
-        role.delete()
+        const role = message.guild.roles.cache.find((role) => { return role.name === action.messagetext });
+        if (role) role.delete();
+        
+        DBS.callNextAction(command, message, args, index + 1);
     }
 };
