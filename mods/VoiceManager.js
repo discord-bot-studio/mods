@@ -34,6 +34,7 @@ module.exports = {
                 <select name="info" id="info" class="form-control" required>
                     <option value="isAuthorInVC">Is Author In Voice Channel</option>
                     <option value="IsBotPlayingSong">Is Bot Playing Song</option>
+                    <option value="joinVC">Join Author Voice CHannel</option>
                     <option value="leaveVC">Leave Voice Channel</option>
                     <option value="voiceVolume">Set Voice Volume</option>
                     <option value="stopPlaying">Stop Playing</option>
@@ -116,6 +117,9 @@ module.exports = {
                 DBS.Cache[message.guild.id].dispatcher.destroy();
                 DBS.Cache[message.guild.id].dispatcher = undefined;
                 DBS.callNextAction(command, message, args, index + 1);
+            break
+            case "joinVC":
+                message.member.voice.channel.join();
             break
         }
     }
