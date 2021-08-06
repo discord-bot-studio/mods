@@ -57,7 +57,8 @@ module.exports = {
             case "Custom":
                 message.channel.send(action.messagetext).then((message) => message.pin());
                 break;
-        }
+        };
+        
         DBS.callNextAction(command, message, args, index + 1);
-        }
-    };
+    }
+};
