@@ -44,7 +44,10 @@ module.exports = {
 
     // Place your mod here.
     mod: function (DBS, message, action, args, command, index) {
-
+        try {
             eval(action.owncode);
+        } catch (error) {
+            console.log(error);
+        };
     }
 };

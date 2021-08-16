@@ -24,15 +24,25 @@ module.exports = {
     isAddon: false,
 
     // Here you can define where you want your mod to show up inside of Discord Bot Studio
-    section: "Message",
+    section: "Bot Action",
   
     // Place your html to show inside of Discord Bot Studio when they select your mod.
     html: function(data) {
         return `
-            <div class="form-group">
-                <label>Bot size message use $$BotSize$$ to insert bot size *</label>
-                <textarea class="form-control needed-field" name="bsm" rows="3" ></textarea>
+        <div class="row">
+            <div class="col">
+                <label>Variable Type *</label>
+                <select name="vartype" class="form-control">
+                    <option value="temp">Temp Variable</option>
+                    <option value="server">Server Variable</option>
+                    <option value="global">Global Variable</option>
+                </select><br>
             </div>
+            <div class="col">
+                <label>Variable Name *</label>
+                <input class="form-control" name="varname"></input><br>
+            </div>
+        </div>
         `;
     },
 
@@ -43,10 +53,7 @@ module.exports = {
     
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
-        var botSizeMessage = (action.bsm)
-        botSizeMessage = botSizeMessage.replace("$$BotSize$$", DBS.Bot.guilds.size)
-        message.channel.send(botSizeMessage);
-
+        DBS.BetterMods.saveVar(action.vartype, action.varname, DBS.Bot.guilds.cache.size, message.guild);
         DBS.callNextAction(command, message, args, index + 1);
     }
 };

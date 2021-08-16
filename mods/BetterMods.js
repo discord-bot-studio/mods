@@ -7,7 +7,7 @@ module.exports = {
     author: ["Discord Bot Studio"],
 
     // Place the version of the mod here.
-    version: "1.0.0",
+    version: "1.0.1",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
     changelog: "Better Mods ~ Great Plains Modding",
@@ -28,8 +28,7 @@ module.exports = {
 
     // Place your html to show inside of Discord Bot Studio when they select your mod.
     html: function(data) {
-        return `
-        `;
+        return ``;
     },
 
     // When the bot is first started, this code will be ran.
@@ -51,15 +50,21 @@ module.exports = {
             } catch (e) {
                 DBS.BetterMods.Logger.warn(`[DBS Module Installer] - Installing ${packageName}`);
 
-                const cliCommand = 'npm install ' + packageName + ' --save';
-                await execSync(cliCommand, {
-                    cwd: join(__dirname),
-                    stdio: [0, 1, 2]
-                });
-
-                DBS.BetterMods.Logger.warn(`[DBS Module Installer] - Successfully Installed ${packageName}. Note you may need to restart your bot.`);
-                const modulePath = join(__dirname, "../node_modules", packageName);
-                return require(modulePath);
+                try {
+                    const cliCommand = 'npm install ' + packageName + ' --save';
+                    await execSync(cliCommand, {
+                        cwd: join(__dirname),
+                        stdio: [0, 1, 2]
+                    });
+    
+                    DBS.BetterMods.Logger.warn(`[DBS Module Installer] - Successfully Installed ${packageName}. Note you may need to restart your bot.`);
+                    const modulePath = join(__dirname, "../node_modules", packageName);
+                    return require(modulePath);
+                } catch (error) {
+                    console.log(error);
+                    DBS.BetterMods.Logger.warn(`[DBS Module Installer] - We ran into an error installing ${packageName}.`);
+                    return null;
+                };
             };
         };
 
@@ -90,22 +95,22 @@ module.exports = {
                 if (match.includes("globalVars.")) return DBS.globalVars[msg.guild.id][match.split(".")[1]];
             });
 
-            return newVal
-        }
+            return newVal;
+        };
 
         DBS.BetterMods.saveVar = function(type, varName, data, guild) {
             switch(type) {
                 case "temp":
                     DBS.Cache[guild.id].variables[varName] = data;
-                break
+                break;
                 case "server":
                     DBS.serverVars[guild.id][varName] = data;
-                break
+                break;
                 case "global":
                     DBS.globalVars[guild.id][varName] = data;
-                break
-            }
-        }
+                break;
+            };
+        };
 
         DBS.BetterMods.getVar = function(type, varName, guild) {
             switch(type) {
@@ -115,12 +120,10 @@ module.exports = {
                     return DBS.serverVars[guild.id][varName];
                 case "global":
                     return DBS.globalVars[guild.id][varName];
-            }
-        }
+            };
+        };
     },
 
     // Place your mod here.
-    mod: async function(DBS, message, action, args, command, index) {
-
-    }
+    mod: async function(DBS, message, action, args, command, index) {}
 };

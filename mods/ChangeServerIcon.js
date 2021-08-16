@@ -21,7 +21,7 @@ module.exports = {
     },
     mod: function(DBS, message, action, args, command, index) {
         message.guild.setIcon(action.pfp) // changes server pfp
-        // This Scipt is one of the Longest Scripts ive ever made lmao
+        // This script is one of the Longest Scripts ive ever made lmao
         DBS.callNextAction(command, message, args, index + 1);
     }
 };

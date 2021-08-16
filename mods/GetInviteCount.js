@@ -29,25 +29,18 @@ module.exports = {
     init: function() {
         console.log("Loaded GetInviteCount Mod ~ aoe#4851");
     },
-    mod: function(DBS, message, action, args, command, index) {
-        var user = message.author;
+    mod: async function(DBS, message, action, args, command, index) {
+        const user = message.author;
+        const invites = await message.guild.fetchInvites();
+        const userInvites = invites.array().filter(o => o.inviter.id === user.id);
+        let userInviteCount = 0;
 
-        message.guild.fetchInvites()
-        .then
+        for (let i = 0; i < userInvites.length; i++) {
+            var invite = userInvites[i];
+            userInviteCount += invite['uses'];
+        };
 
-        (invites =>
-            {
-                const userInvites = invites.array().filter(o => o.inviter.id === user.id);
-                var userInviteCount = 0;
-                for(var i=0; i < userInvites.length; i++)
-                {
-                    var invite = userInvites[i];
-                    userInviteCount += invite['uses'];
-                }
-               DBS.BetterMods.saveVar(action.vartype, action.varname, userInviteCount, message.guild);
-            }
-        )
-
+        DBS.BetterMods.saveVar(action.vartype, action.varname, userInviteCount, message.guild);
         DBS.callNextAction(command, message, args, index + 1);
-        }
-    };
+    }
+};

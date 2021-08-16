@@ -133,3 +133,11 @@ Dev: Pokemonultra#2815 & zCuzImJonas#1010
 • BetterModsV2
 This is needed for DBS functionallity
 Dev: STR1KE#6969
+
+• CreateGuildInvite
+Creates a Guild Invite in the Command Channel
+Dev: aoe#4851
+
+• SetPrefix
+Sets a Prefix Per Server
+Dev: aoe#4851
