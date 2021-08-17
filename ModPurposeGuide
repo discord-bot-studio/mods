@@ -133,3 +133,7 @@ Dev: aoe#4851
 • SetPrefix
 Sets a Prefix Per Server
 Dev: aoe#4851
+
+• EditEmbed
+Sends and edits an embed
+Dev: Miro#6969 & STR1KE
