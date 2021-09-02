@@ -134,6 +134,18 @@ Dev: aoe#4851
 Sets a Prefix Per Server
 Dev: aoe#4851
 
+• EditEmbed
+Sends and edits an embed
+Dev: Miro#6969 & STR1KE
+
+• RemoveReaction
+Removes an reaction from an already said message for an User
+Dev:Miro#6969
+
+• Unpinall
+Unpins every pinned message within the command channel
+Dev:Miro#6969
+
 • CopyChannel
 Copys a Channel with the Same Permissions
 Dev: aoe#4851
