@@ -133,3 +133,11 @@ Dev: aoe#4851
 • SetPrefix
 Sets a Prefix Per Server
 Dev: aoe#4851
+
+• CopyChannel
+Copys a Channel with the Same Permissions
+Dev: aoe#4851
+
+• SetChannelPos
+Sets a new Channel Position for a Channel
+Dev: aoe#4851
