@@ -133,3 +133,15 @@ Dev: aoe#4851
 • SetPrefix
 Sets a Prefix Per Server
 Dev: aoe#4851
+
+• EditEmbed
+Sends and edits an embed
+Dev: Miro#6969 & STR1KE
+
+• RemoveReaction
+Removes an reaction from an already said message for an User
+Dev:Miro#6969
+
+• Unpinall
+Unpins every pinned message within the command channel
+Dev:Miro#6969
