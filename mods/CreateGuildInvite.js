@@ -1,8 +1,8 @@
 module.exports = {
     name: "CreateGuildInvite",
     author: ["aoe#4851"],
-    version: "0.0.1",
-    changelog: "Added CreateGuildInvite Mod ~ aoe#4851",
+    version: "1.2.0",
+    changelog: "Added Max Age and Max Uses ~ aoe#4851",
     isEvent: false,
     isResponse: true,
     isMod: true,
@@ -10,6 +10,18 @@ module.exports = {
     section: "Channel Action",
     html: function(data) {
         return `
+    </div> 
+      <div class="col"> 
+        <label>Max Age (Use 0 for ∞ Age)*</label> 
+        <input class="form-control" name="maxage"></input><br> 
+      </div> 
+    </div> 
+    </div> 
+      <div class="col"> 
+        <label>Max Uses (Use 0 for ∞ Uses) *</label> 
+        <input class="form-control" name="maxuses"></input><br> 
+      </div> 
+    </div> 
         <div class="row">
             <div class="col">
                 <label>Variable Type *</label>
@@ -30,7 +42,7 @@ module.exports = {
         console.log("Loaded CreateGuildInvite Mod ~ aoe#4851");
     },
     mod: async function(DBS, message, action, args, command, index) {
-        const invite = await message.channel.createInvite({unique: true})
+        const invite = await message.channel.createInvite({ maxAge: action.maxage, maxUse: action.maxuses })
         DBS.BetterMods.saveVar(action.vartype, action.varname, invite, message.guild);
         DBS.callNextAction(command, message, args, index + 1);
     }
