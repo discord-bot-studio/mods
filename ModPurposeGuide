@@ -145,3 +145,11 @@ Dev:Miro#6969
 • Unpinall
 Unpins every pinned message within the command channel
 Dev:Miro#6969
+
+• CopyChannel
+Copys a Channel with the Same Permissions
+Dev: aoe#4851
+
+• SetChannelPos
+Sets a new Channel Position for a Channel
+Dev: aoe#4851
