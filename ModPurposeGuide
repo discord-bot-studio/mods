@@ -153,3 +153,11 @@ Dev: aoe#4851
 • SetChannelPos
 Sets a new Channel Position for a Channel
 Dev: aoe#4851
+
+• Meme Variable
+Gets a Image from Meme Subreddits, name of the subreddit or a link of the subreddit
+Dev: koki1019#1019
+
+• Canvas 
+Draws an image on top of a background
+Dev: koki1019#1019
