@@ -43,10 +43,7 @@ module.exports = {
 
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
-        message.channel.send(action.messagetext, {
-            tts: true
-        })
-
+        message.channel.send(action.messagetext, { tts: true });
         DBS.callNextAction(command, message, args, index + 1);
     }
 };

@@ -51,13 +51,7 @@ module.exports = {
         var NoMatch = action.nomatch;
 
         if (message.channel.id === channelID) {
-            DBS.callNextAction(command, message, args, index + 1)
-
-        } else {
-            
-            if (NoMatch) {
-                message.channel.send(NoMatch)
-            }
-        }
+            DBS.callNextAction(command, message, args, index + 1);
+        } else message.channel.send(NoMatch);
     }
 };

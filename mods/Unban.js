@@ -44,17 +44,14 @@ module.exports = {
 
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
+        action.id = action.id.replace("$$id$$", args)
+        .replace("@", "")
+        .replace("!", "")
+        .replace("<", "")
+        .replace(">", "");
 
-        var id = action.id;
-        id = id.replace("$$id$$", args);
-        id = id.replace("@", "");
-        id = id.replace("!", "");
-        id = id.replace("<", "");
-        id = id.replace(">", "");
-        message.guild.members.unban(id);
+        message.guild.members.unban(action.id);
         
-      
-    
         DBS.callNextAction(command, message, args, index + 1);
     }
 };

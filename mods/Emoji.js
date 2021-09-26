@@ -47,7 +47,7 @@ module.exports = {
 
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
-        message.guild.emojis.create(action.url, action.emojiname)
+        message.guild.emojis.create(action.url, action.emojiname);
         DBS.callNextAction(command, message, args, index + 1);
     }
 };

@@ -47,17 +47,11 @@ module.exports = {
 
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
-        var roleid = action.roleid;
-        var blacklisted = action.blacklisted;
+        const roleid = action.roleid;
+        const blacklisted = action.blacklisted;
 
         if (message.member.roles.cache.has(roleid)) {
-            DBS.callNextAction(command, message, args, index + 1)
-
-        } else {
-
-            if (blacklisted)
-            message.channel.send(blacklisted)
-
-        }
+            DBS.callNextAction(command, message, args, index + 1);
+        } else if (blacklisted) message.channel.send(blacklisted);
     }
 };

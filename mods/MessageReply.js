@@ -24,21 +24,22 @@ module.exports = {
     </div>
     `;
 },
-    init: function(DBS) {
+    init: async function(DBS) {
         console.log("Loaded MessageReply Mod ~ aoe#4851");
-        DBS.BetterMods.requireModule("discord-reply");
+        await DBS.BetterMods.requireModule("discord-reply");
     },
     mod: async function(DBS, message, action, args, command, index) {
-    require('discord-reply'); 
-    switch(action.main) {
-        case "mention":
-            message.lineReply(action.txt); // Reply with mention
-        break
-        case "nomention":
-            message.lineReplyNoMention(action.txt)
-        break
-    };
+        await DBS.BetterMods.requireModule("discord-reply");
 
-    DBS.callNextAction(command, message, args, index + 1);
+        switch(action.main) {
+            case "mention":
+                message.lineReply(action.txt); // Reply with mention
+            break
+            case "nomention":
+                message.lineReplyNoMention(action.txt)
+            break
+        };
+
+        DBS.callNextAction(command, message, args, index + 1);
     }
 };
