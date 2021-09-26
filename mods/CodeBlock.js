@@ -14,7 +14,7 @@ module.exports = {
 
     // Set this to true if this will be an event.
     isEvent: false,
-    
+
     isResponse: true,
 
     // Set this to true if this will be a response mod.
@@ -27,24 +27,27 @@ module.exports = {
     section: "Message",
 
     // Place your html to show inside of Discord Bot Studio when they select your mod.
-    html: function(data) {
+    html: function (data) {
         return `
             <div class="form-group">
                 <label>You can enter Custom Code here </label>
                 <textarea class="form-control needed-field" name="ownCode" rows="20" placeholder='message.channel.send("This is a Test")'></textarea>
-                <p>Need help?, <a href="https://discord.js.org/#/docs/main/v12/general/welcome" target="_blank">Click me</a></p>
+                <p>Need help?, <a href="https://discord.js.org/#/docs/main/main/general/welcome" target="_blank">Click me to open Discord.js Docs</a></p>
             </div>
         `;
     },
 
     // When the bot is first started, this code will be ran.
-    init: function() {
+    init: function () {
         console.log("Loaded Code Block");
     },
 
     // Place your mod here.
     mod: function (DBS, message, action, args, command, index) {
-
+        try {
             eval(action.owncode);
+        } catch (error) {
+            console.log(error);
+        };
     }
 };
