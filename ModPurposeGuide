@@ -146,6 +146,18 @@ Dev: aoe#9214
 Sets a new Channel Position for a Channel
 Dev: aoe#9214
 
+• Meme Variable
+Gets a Image from Meme Subreddits, name of the subreddit or a link of the subreddit
+Dev: koki1019#1019
+
+• Canvas 
+Draws an image on top of a background
+Dev: koki1019#1019
+
+• Level Card 
+Sends an image of a card that has level stats, Mentioning works
+Dev: koki1019#1019
+
 • DiscordToGether
 Creates Activitys(Youtube, Poker, Chess...)
 Dev: aoe#9214
