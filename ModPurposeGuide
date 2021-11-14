@@ -84,43 +84,35 @@ Dev: Big D#1129
 
 • Change Server Name
 Changes the Name of the Server
-Dev: aoe#4851
+Dev: aoe#9214
 
 • Change Server Region
 Changes the Region of the Server
-Dev: aoe#4851
+Dev: aoe#9214
 
 • Change Server Icon 
 Changes the Icon of the Server 
-Dev: aoe#4851
+Dev: aoe#9214
 
 • Leave Server 
 Ability to let the Bot Leave the Server
-Dev: aoe#4851
+Dev: aoe#9214
 
 • Emoji
-Creates a New Emoji 
-Dev: aoe#4851
+Adds an new Emoji to the Server 
+Dev: aoe#9214
 
 • GetInviteCount
 Gets the Invite Count from the Message Author and saves it into a var
-Dev: aoe#4851
-
-• MessageReply
-Normal Message Reply
-Dev: aoe#4851
-
-• Embed Reply
-Embed Message Reply
-Dev: aoe#4851
+Dev: aoe#9214
 
 • Random User
 Gets a random User from a reaction
-Dev: aoe#4851
+Dev: aoe#9214
 
 • CreateCategory
 Creates a Category
-Dev: aoe#4851
+Dev: aoe#9214
 
 • Get Mentioned Role
 Gets the mentioned Role
@@ -128,11 +120,11 @@ Dev: Pokemonultra#2815
 
 • CreateGuildInvite
 Creates a Guild Invite in the Command Channel
-Dev: aoe#4851
+Dev: aoe#9214
 
 • SetPrefix
 Sets a Prefix Per Server
-Dev: aoe#4851
+Dev: aoe#9214
 
 • EditEmbed
 Sends and edits an embed
@@ -148,11 +140,11 @@ Dev:Miro#6969
 
 • CopyChannel
 Copys a Channel with the Same Permissions
-Dev: aoe#4851
+Dev: aoe#9214
 
 • SetChannelPos
 Sets a new Channel Position for a Channel
-Dev: aoe#4851
+Dev: aoe#9214
 
 • Meme Variable
 Gets a Image from Meme Subreddits, name of the subreddit or a link of the subreddit
@@ -165,3 +157,7 @@ Dev: koki1019#1019
 • Level Card 
 Sends an image of a card that has level stats, Mentioning works
 Dev: koki1019#1019
+
+• DiscordToGether
+Creates Activitys(Youtube, Poker, Chess...)
+Dev: aoe#9214
