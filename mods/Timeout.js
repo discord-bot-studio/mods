@@ -44,7 +44,12 @@ module.exports = {
     },
     init: async function(DBS) {
         console.log("Loaded Timeout Mod ~ aoe#4851");
-        await DBS.BetterMods.requireModule("discord.js");
+        console.log('\x1b[33m%s\x1b[0m', '[Timeout Mod] - Installing newest discord.js Version.');
+        var process = require('child_process');
+        process.exec('npm install discord.js@latest',async function (err) {
+            if (err) throw err
+        });
+        console.log('\x1b[32m%s\x1b[0m', '[Timeout Mod] - Finnished installing the newest discord.js Version!');
     },
     mod: async function(DBS, message, action, args, command, index) {
         const ms = require("ms");
