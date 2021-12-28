@@ -12,9 +12,9 @@ module.exports = {
         return `
         </div>
         <div class="col">
-        <label>User to Timeout *</label>
+        <label>User to Timeout(Leave it out to get the user via mention) </label>
     <div class="input-group mb-3">
-        <input class="form-control needed-field" name="user"></input><br>
+        <input class="form-control" name="user"></input><br>
             <div class="input-group-append">
                 <a class="btn btn-outline-primary" role="button" id="variables" forinput="user">Insert Variable</a>
         </div>
@@ -43,7 +43,7 @@ module.exports = {
         `;
     },
     init: async function(DBS) {
-        console.log("Loaded Timeout Mod ~ aoe#4851");
+        console.log("Loaded Timeout Mod ~ aoe#4851")
         console.log('\x1b[33m%s\x1b[0m', '[Timeout Mod] - Installing newest discord.js Version.');
         var process = require('child_process');
         process.exec('npm install discord.js@latest',async function (err) {
@@ -60,12 +60,22 @@ module.exports = {
                 .then(console.log)
                 .catch(console.error);
         }
-        const Time = ms(DBS.BetterMods.parseAction(action.time, message));
-        const User = await message.guild.members.fetch(DBS.BetterMods.parseAction(action.user, message))
-        const Reason = DBS.BetterMods.parseAction(action.reason, message)
-        User.timeout(Time, Reason)
-            .then(console.log)
-            .catch(console.error);
+        if (action.user == "") {
+            const Time = ms(DBS.BetterMods.parseAction(action.time, message));
+            const User = message.mentions.members.first()
+            const Reason = DBS.BetterMods.parseAction(action.reason, message)
+            User.timeout(Time, Reason)
+                .then(console.log)
+                .catch(console.error);
+        }
+        if (action.user !== "") {
+            const Time = ms(DBS.BetterMods.parseAction(action.time, message));
+            const User = await message.guild.members.fetch(DBS.BetterMods.parseAction(action.user, message))
+            const Reason = DBS.BetterMods.parseAction(action.reason, message)
+            User.timeout(Time, Reason)
+                .then(console.log)
+                .catch(console.error);
+        }
         DBS.callNextAction(command, message, args, index + 1);
     }
 };
