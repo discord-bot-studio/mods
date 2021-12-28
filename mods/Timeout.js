@@ -54,15 +54,15 @@ module.exports = {
     mod: async function(DBS, message, action, args, command, index) {
         const ms = require("ms");
         if (action.time == "null") {
-            const User = await message.guild.members.fetch(action.user)
-            const Reason = action.reason
+            const User = await message.guild.members.fetch(DBS.BetterMods.parseAction(action.user, message))
+            const Reason = DBS.BetterMods.parseAction(action.reason, message)
             User.timeout(null, Reason)
                 .then(console.log)
                 .catch(console.error);
         }
-        const Time = ms(action.time);
-        const User = await message.guild.members.fetch(action.user)
-        const Reason = action.reason
+        const Time = ms(DBS.BetterMods.parseAction(action.time, message));
+        const User = await message.guild.members.fetch(DBS.BetterMods.parseAction(action.user, message))
+        const Reason = DBS.BetterMods.parseAction(action.reason, message)
         User.timeout(Time, Reason)
             .then(console.log)
             .catch(console.error);
