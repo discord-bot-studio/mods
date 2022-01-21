@@ -38,10 +38,12 @@ module.exports = {
                 </div>
             </div>
         </div>
+        <div class="col">
             <div class="form-group">
                 <label>Reply text message</label>
                 <textarea class="form-control needed-field" name="replytext" rows="3" ></textarea>
             </div>
+        </div>
             <div class="col">
                 <label>Mention User?</label>
                     <select name="mentionuser" class="form-control">
