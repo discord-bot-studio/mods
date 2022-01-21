@@ -1,16 +1,16 @@
 module.exports = {
     // Set this to the name of the mod. This is what will be shown inside of Discord Bot Studio.
     // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
-    name: "Better Mods",
+    name: "Better Mods V2.1",
 
     // Place the author of the mod here. This is an array so you can add other authors by writing ["Great Plains Modding", "New User"]
-    author: ["Discord Bot Studio"],
+    author: ["Discord Bot Studio","STR1KE#6969"],
 
     // Place the version of the mod here.
-    version: "1.0.1",
+    version: "1.0.0",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
-    changelog: "Better Mods ~ Great Plains Modding",
+    changelog: "Added CommandMessage to parseAction function ~ ni#5375",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -28,7 +28,8 @@ module.exports = {
 
     // Place your html to show inside of Discord Bot Studio when they select your mod.
     html: function(data) {
-        return ``;
+        return `
+        `;
     },
 
     // When the bot is first started, this code will be ran.
@@ -44,13 +45,13 @@ module.exports = {
         };
 
         DBS.BetterMods.requireModule = async function(packageName) {
-            try {
-                const modulePath = join(__dirname, "../node_modules", packageName);
-                return require(modulePath);
-            } catch (e) {
-                DBS.BetterMods.Logger.warn(`[DBS Module Installer] - Installing ${packageName}`);
-
+            try{
                 try {
+                    const modulePath = join(__dirname, "../node_modules", packageName);
+                    return require(modulePath);
+                } catch (e) {
+                    DBS.BetterMods.Logger.warn(`[DBS Module Installer] - Installing ${packageName}`);
+    
                     const cliCommand = 'npm install ' + packageName + ' --save';
                     await execSync(cliCommand, {
                         cwd: join(__dirname),
@@ -60,57 +61,48 @@ module.exports = {
                     DBS.BetterMods.Logger.warn(`[DBS Module Installer] - Successfully Installed ${packageName}. Note you may need to restart your bot.`);
                     const modulePath = join(__dirname, "../node_modules", packageName);
                     return require(modulePath);
-                } catch (error) {
-                    console.log(error);
-                    DBS.BetterMods.Logger.warn(`[DBS Module Installer] - We ran into an error installing ${packageName}.`);
-                    return null;
                 };
-            };
+            }catch{
+                process.send(`Could not install <b>${packageName}</b> module`)
+            }
         };
 
         DBS.BetterMods.parseAction = function(string, msg) {
+            let dbsVars = {}
+            dbsVars["CommandAuthor"] = msg.member
+            dbsVars["CommandChannel"] = msg.channel
+            dbsVars["CommandMessage"] = msg
+            dbsVars["guild"] = msg.guild
+            let tempVars = DBS.Cache[msg.guild.id].variables
+            let serverVars = DBS.serverVars[msg.guild.id]
+            let globalVars = DBS.globalVars[msg.guild.id]
+            let vars = {
+                tempVars: tempVars,
+                serverVars: serverVars,
+                globalVars: globalVars,
+                dbsVars: dbsVars,
+            }
+            let varRegex = /\${(.*?)}/g;
             let newVal = string;
-
-            if (msg) {
-                newVal = newVal.replace("$$CommandChannel$$", msg.channel.name)
-                .replace("$$CommandAuthor$$", msg.author.id)
-                .replace("$$AuthorDisplayName$$", msg.member.displayName)
-                .replace("$$AuthorAvatar$$", msg.author.avatarURL)
-                // .replace("$$DefaultChannel$$", Functions.getDefaultChannel(msg.guild))
-                .replace("$$ServerIcon$$", msg.guild.iconURL)
-                .replace("$$MemberCount$$", msg.guild.memberCount.toString())
-                .replace("$$JoinedAt$$", msg.guild.joinedAt.toString())
-                .replace("$$ServerName$$", msg.guild.name)
-                // .replace("$$ServerOwner$$", msg.guild.owner.id)
-                .replace("$$ServerRegion$$", msg.guild.region)
-                .replace("${dbsVars.CommandAuthor.user.dmChannel}", "@@MSG_AUTHOR@@")
-                .replace("$$VerificationLevel$$", msg.guild.verificationLevel.toString())
-                .replace("${dbsVars.CommandAuthor.user.avatarURL}", msg.member.user.displayAvatarURL());
-            };
-
-            newVal = newVal.replace(/\${(.*?)}/g, (d) => {
-                const match = d.slice(2, d.toString().length - 1);
-                if (match.includes("tempVars.")) return DBS.Cache[msg.guild.id].variables[match.split(".")[1]];
-                if (match.includes("serverVars.")) return DBS.serverVars[msg.guild.id][match.split(".")[1]];
-                if (match.includes("globalVars.")) return DBS.globalVars[msg.guild.id][match.split(".")[1]];
-            });
-
-            return newVal;
-        };
+            for(let i = 0; i <string.match(varRegex)?.length; i++){
+                newVal = newVal.replace(string.match(varRegex)[i],getDescendantProp(vars,string.match(varRegex)[i].split("${").join("").split("}").join("")))
+            }
+            return newVal
+        }
 
         DBS.BetterMods.saveVar = function(type, varName, data, guild) {
             switch(type) {
                 case "temp":
                     DBS.Cache[guild.id].variables[varName] = data;
-                break;
+                break
                 case "server":
                     DBS.serverVars[guild.id][varName] = data;
-                break;
+                break
                 case "global":
                     DBS.globalVars[guild.id][varName] = data;
-                break;
-            };
-        };
+                break
+            }
+        }
 
         DBS.BetterMods.getVar = function(type, varName, guild) {
             switch(type) {
@@ -120,10 +112,19 @@ module.exports = {
                     return DBS.serverVars[guild.id][varName];
                 case "global":
                     return DBS.globalVars[guild.id][varName];
-            };
-        };
+            }
+        }
+        function getDescendantProp(obj, desc) {
+            var arr = desc.split(".");
+            while (arr.length) {
+                obj = obj[arr.shift()];
+            }
+            return obj;
+        }
     },
 
     // Place your mod here.
-    mod: async function(DBS, message, action, args, command, index) {}
+    mod: async function(DBS, message, action, args, command, index) {
+
+    }
 };
