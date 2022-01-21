@@ -45,8 +45,8 @@ module.exports = {
             <div class="col">
                 <label>Mention User?</label>
                     <select name="mentionuser" class="form-control">
-                        <option value="false">Disabled</option>
                         <option value="true">Enabled</option>
+                        <option value="false">Disabled</option>
                     </select>
             </div>
         `;
@@ -61,29 +61,15 @@ module.exports = {
     // Place your mod here.
     mod: async function(DBS, message, action, args, command, index) {
 
-        const msgid = DBS.BetterMods.parseAction(action.msgid, message)
-        
-        const msg = await message.channel.messages.fetch(msgid);
+        const msg = await message.channel.messages.fetch(DBS.BetterMods.parseAction(action.msgid, message));
+        const mention = action.mentionuser;
 
-        switch(action.mentionuser) {
-            case "true":
-                msg.reply({
-                content: `${action.replytext}`,
-                allowedMentions: {
-                    repliedUser: true
+        msg.reply({
+            content: `${action.replytext}`,
+            allowedMentions: {
+                repliedUser: mention
                 }
-            })
+        })
             DBS.callNextAction(command, message, args, index + 1);
-                break;
-            case "false":
-                msg.reply({
-                content: `${action.replytext}`,
-                allowedMentions: {
-                    repliedUser: false
-                }
-            })
-            DBS.callNextAction(command, message, args, index + 1);
-                break;
         }
-    }
-};
+    };
