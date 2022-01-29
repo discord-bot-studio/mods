@@ -173,3 +173,7 @@ Dev: ni#5375
 • Threads
 Lets you create, delete and do much more with Threads 
 Dev: aoe#9214
+
+• Await User Message
+Awaits for the message of a specific user in a specific channel
+Dev: Snorlaxmon#2007
