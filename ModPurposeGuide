@@ -1,5 +1,5 @@
 Mod Purpose Guide
-Updated: 8/1/20
+Updated: 31/01/2022
 
 • EmbedPoll
 Embeds a poll with up to 9 different options to vote for.
@@ -172,6 +172,10 @@ Dev: ni#5375
 
 • Threads
 Lets you create, delete and do much more with Threads 
+Dev: aoe#9214
+
+• Guilds
+Lets you create, delete and do much more with Guilds
 Dev: aoe#9214
 
 • Await User Message
