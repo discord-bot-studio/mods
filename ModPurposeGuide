@@ -1,5 +1,5 @@
 Mod Purpose Guide
-Updated: 8/1/20
+Updated: 31/01/2022
 
 • EmbedPoll
 Embeds a poll with up to 9 different options to vote for.
@@ -177,3 +177,7 @@ Dev: aoe#9214
 • Guilds
 Lets you create, delete and do much more with Guilds
 Dev: aoe#9214
+
+• Await User Message
+Awaits for the message of a specific user in a specific channel
+Dev: Snorlaxmon#2007
