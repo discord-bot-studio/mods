@@ -75,6 +75,7 @@ module.exports = {
                     level: 'error',
                     message: '[Await User Message]: ' + error,
                 })
+                DBS.callNextAction(command, message, args, index + 1)
             });
     },
 };
