@@ -1,6 +1,6 @@
 module.exports = {
     name: "Set Nickname",
-    author: ["PlayboyPrime#3839"]
+    author: ["PlayboyPrime#3839"],
     version: "1.0.0",
     changelog: "Release",
     isEvent: false,
