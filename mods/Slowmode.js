@@ -7,10 +7,10 @@ module.exports = {
     author: ["STR1KE#6969"],
 
     // Place the version of the mod here.
-    version: "0.1.0",
+    version: "0.1.1",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
-    changelog: "nothing",
+    changelog: "fixed",
 
     // Set this to true if this will be an event.
     isEvent: false,
