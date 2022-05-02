@@ -177,3 +177,7 @@ Dev: aoe#9214
 • Guilds
 Lets you create, delete and do much more with Guilds
 Dev: aoe#9214
+
+• AwaitUserMessage
+Awaits for the message of an user in a channel
+Dev: Snorlaxmon#7278
