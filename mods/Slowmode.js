@@ -1,5 +1,3 @@
-const { Guild, Client } = require("discord.js");
-
 module.exports = {
     // Set this to the name of the mod. This is what will be shown inside of Discord Bot Studio.
     // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
@@ -9,10 +7,10 @@ module.exports = {
     author: ["STR1KE#6969"],
 
     // Place the version of the mod here.
-    version: "0.1.0",
+    version: "0.1.1",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
-    changelog: "nothing",
+    changelog: "fixed",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -31,15 +29,14 @@ module.exports = {
     // Place your html to show inside of Discord Bot Studio when they select your mod.
     html: function(data) {
         return `
-            <div class="form-group">
-                <label>Slowmode(use $$slowmode$$ to set the slowmode for a mentioned duration in a message)*</label>
-                <textarea class="form-control needed-field" name="slowmode" rows="1" ></textarea>
-            </div>
-            <div class="form-group">
+        <div class="form-group">
+            <label>Slowmode(use $$slowmode$$ to set the slowmode for a mentioned duration in a message)*</label>
+            <textarea class="form-control needed-field" name="slowmode" rows="1" ></textarea>
+        </div>
+        <div class="form-group">
             <label>Slowmode message(use $$slowmode$$ to get the seconds)</label>
             <textarea class="form-control field" name="slowmsg" rows="1" ></textarea>
         </div>
-           \
         `;
     },
 
