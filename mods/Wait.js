@@ -4,13 +4,13 @@ module.exports = {
     name: "Wait",
 
     // Place the author of the mod here. This is an array so you can add multiple authors.
-    author: ["Discord Bot Studio", "Vannzilla"],
+    author: ["Discord Bot Studio", "Vannzilla", "Finbar"],
 
     // Place the version of the mod here.
     version: "1.0.0",
 
     // Whenever you make a change, place the changelog here.
-    changelog: "Added var support, added more time increment options ~Vannz",
+    changelog: "Added more time options, optimized code.",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -33,6 +33,7 @@ module.exports = {
         return `
             <label>Increment *</label>
             <select name="increment" class="form-control">
+                <option value="ms">Milliseconds</option>
                 <option value="seconds" selected>Seconds</option>
                 <option value="minutes">Minutes</option>
                 <option value="hours">Hours</option>
@@ -40,7 +41,7 @@ module.exports = {
             </select>
             <div class="form-group">
                     <label>Time to wait for *</label>
-                    <input class="form-control needed-field" name="time" />
+                    <input class="form-control needed-field" name="time"/>
             </div>
             <b>Better mods is required for variable support</b>
         `;
@@ -53,7 +54,7 @@ module.exports = {
 
     // Place your mod here.
     mod: async function (DBS, message, action, args, command, index) {
-        var seconds;
+        let seconds;
         // Get time to wait
         try {
             seconds = DBS.BetterMods.parseAction(action.time, message);
@@ -63,31 +64,14 @@ module.exports = {
             seconds = action.time;
         }
         // Find the time increment
-        switch (action.increment) {
-            case "minutes":
-                seconds * 60;
-                break;
-            case "hours":
-                seconds * 3600;
-                break;
-            case "days":
-                seconds * 86400;
-                break;
-        }
+        seconds = [seconds / 1000, seconds, seconds * 60, seconds * 3600, seconds * 86400][["milliseconds", "seconds", "minutes", "hours", "days"].indexOf(action.increment)];
 
         try {
-            const timer = ms => new Promise(res => setTimeout(res, ms));
-
-            // Ensure seconds is a number
-            if (!isNaN(Number(seconds))) {
-                var milliseconds = seconds * 1000;
-
-                // Wait for seconds
-                await timer(milliseconds);
-                
-                // Must call this, or the rest of the response sequence will not run
+            if(isNaN(seconds))
+                return DBS.callNextAction(command, message, args, index + 1);
+            setTimeout(() => {
                 DBS.callNextAction(command, message, args, index + 1);
-            }
+            }, seconds);
         } catch (error) {
             console.error(error);
         }
