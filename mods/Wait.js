@@ -64,7 +64,7 @@ module.exports = {
             seconds = action.time;
         }
         // Find the time increment
-        seconds = [action.time / 1000, action.time, action.time * 60, action.time * 3600, action.time * 86400][["milliseconds", "seconds", "minutes", "hours", "days"].indexOf(action.increment)];
+        seconds = [seconds / 1000, seconds, seconds * 60, seconds * 3600, seconds * 86400][["milliseconds", "seconds", "minutes", "hours", "days"].indexOf(action.increment)];
 
         try {
             if(isNaN(seconds))
