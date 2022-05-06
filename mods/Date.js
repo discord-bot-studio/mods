@@ -12,7 +12,7 @@ module.exports = {
     html: function (data) {
         return `
         <label for="datetime">Date and time</label>
-        <input type="datetime-local" name="datetime" id="datetime" onchange="console.log(this.value)" class="form-control">
+        <input type="datetime-local" name="datetime" id="datetime" class="form-control">
         `
         ;
     },
