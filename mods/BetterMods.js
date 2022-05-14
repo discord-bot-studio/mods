@@ -69,34 +69,28 @@ module.exports = {
         };
 
         DBS.BetterMods.parseAction = function(string, msg) {
+            let dbsVars = {}
+            dbsVars["CommandAuthor"] = msg.member
+            dbsVars["CommandChannel"] = msg.channel
+            dbsVars["CommandMessage"] = msg
+            dbsVars["guild"] = msg.guild
+            dbsVars["DefaultChannel"] = Array.from(msg.guild.channels).sort((a,b) => a.calculatedPosition - b.calculatedPosition)[0]
+            let tempVars = DBS.Cache[msg.guild.id].variables
+            let serverVars = DBS.serverVars[msg.guild.id]
+            let globalVars = DBS.globalVars[msg.guild.id]
+            let vars = {
+                tempVars: tempVars,
+                serverVars: serverVars,
+                globalVars: globalVars,
+                dbsVars: dbsVars,
+            }
+            let varRegex = /\${(.*?)}/g;
             let newVal = string;
-
-            if (msg) {
-                newVal = newVal.replace("$$CommandChannel$$", msg.channel.name)
-                .replace("$$CommandAuthor$$", msg.author.id)
-                .replace("$$AuthorDisplayName$$", msg.member.displayName)
-                .replace("$$AuthorAvatar$$", msg.author.avatarURL)
-                // .replace("$$DefaultChannel$$", Functions.getDefaultChannel(msg.guild))
-                .replace("$$ServerIcon$$", msg.guild.iconURL)
-                .replace("$$MemberCount$$", msg.guild.memberCount.toString())
-                .replace("$$JoinedAt$$", msg.guild.joinedAt.toString())
-                .replace("$$ServerName$$", msg.guild.name)
-                // .replace("$$ServerOwner$$", msg.guild.owner.id)
-                .replace("$$ServerRegion$$", msg.guild.region)
-                .replace("${dbsVars.CommandAuthor.user.dmChannel}", "@@MSG_AUTHOR@@")
-                .replace("$$VerificationLevel$$", msg.guild.verificationLevel.toString())
-                .replace("${dbsVars.CommandAuthor.user.avatarURL}", msg.member.user.displayAvatarURL());
-            };
-
-            newVal = newVal.replace(/\${(.*?)}/g, (d) => {
-                const match = d.slice(2, d.toString().length - 1);
-                if (match.includes("tempVars.")) return DBS.Cache[msg.guild.id].variables[match.split(".")[1]];
-                if (match.includes("serverVars.")) return DBS.serverVars[msg.guild.id][match.split(".")[1]];
-                if (match.includes("globalVars.")) return DBS.globalVars[msg.guild.id][match.split(".")[1]];
-            });
-
-            return newVal;
-        };
+            for(let i = 0; i <string.match(varRegex)?.length; i++){
+                newVal = newVal.replace(string.match(varRegex)[i],getDescendantProp(vars,string.match(varRegex)[i].split("${").join("").split("}").join("")))
+            }
+            return newVal
+        }
 
         DBS.BetterMods.saveVar = function(type, varName, data, guild) {
             switch(type) {
