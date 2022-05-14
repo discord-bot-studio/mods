@@ -45,7 +45,7 @@ module.exports = {
     },
 
     // When the bot is first started, this code will be ran.
-    init: function() {
+    init: function(DBS) {
         console.log("| Loaded More Status Mod\n| If you have any problems with the mod contact Vannzilla#5260");
     },
 

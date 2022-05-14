@@ -22,10 +22,14 @@ module.exports = {
  </div>
         `;
     },
-    init: function() {
+    init: function(DBS) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
         console.log("Loaded SetChannelPos Mod ~ aoe#4851");
     },
     mod: function(DBS, message, action, args, command, index) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
     if (action.newpos == "$$pos$$") {
         var pos = message.channel.position
         message.channel.setPosition(pos)

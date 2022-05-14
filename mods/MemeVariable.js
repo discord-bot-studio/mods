@@ -52,12 +52,16 @@ module.exports = {
 
     // When the bot is first started, this code will be ran.
     init: function(DBS) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
         DBS.BetterMods.requireModule('random-puppy');
         console.log("Meme Variable Loaded!\n Contact koki1019#1019 For help");
     },
 
     // Place your mod here.
     mod: async function(DBS, message, action, args, command, index) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
         const randomPuppy = require("random-puppy")
 
         const SubReddits = ["dankmeme", "dankmemes", "meme", "me_irl", "memes", "AdviceAnimals", "terriblefacebookmemes", "MemeEconomy", "ComedyCemetery", "PrequelMemes"];

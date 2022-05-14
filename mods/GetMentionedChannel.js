@@ -49,11 +49,15 @@ module.exports = {
 
     // When the bot is first started, this code will be ran.
     init: function () {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
         console.log("Loaded Get Mentioned Channel/n|Any Problems? Message me Pokemonultra#2815");
     },
 
     // Place your mod here.
     mod: function (DBS, message, action, args, command, index) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
         const MChannel = message.mentions.channels.first();
 
         

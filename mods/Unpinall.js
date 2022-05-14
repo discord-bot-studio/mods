@@ -14,7 +14,7 @@ module.exports = {
             <p3><strong>NOTE:</strong>This mod unpins everything within an channel!</p3>
         `;
     },
-    init: function() {
+    init: function(DBS) {
         console.log("Loaded Unpin all v1.0.0 \n    | If you've got any issues/questions please DM Miro#6969");
     },
     mod: async function(DBS, message, action, args, command, index) {

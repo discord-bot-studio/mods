@@ -276,11 +276,15 @@ module.exports = {
     `},
 
     init: function (DBS) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
         DBS.BetterMods.requireModule("captcha-canvas")
         console.log("Loaded Captcha");
     },
 
     mod: async function (DBS, message, action, args, command, index) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
         switch (action.codetype) {
             case "random":
                 code = Math.random().toString(16).substr(2, 6)

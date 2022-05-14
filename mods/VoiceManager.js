@@ -88,12 +88,16 @@ module.exports = {
     },
 
     // When the bot is first started, this code will be ran.
-    init: function() {
+    init: function(DBS) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
         console.log("Loaded VoiceManager.js");
     },
 
     // Place your mod here.
     mod: async function(DBS, message, action, args, command, index) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
         switch(action.info) {
             case "isAuthorInVC":
                 if (message.member.voice.channel) {

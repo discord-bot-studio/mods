@@ -188,9 +188,13 @@ module.exports = {
         `;
     },
     init: async function(DBS) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
         console.log("Loaded Guilds Mod ~ aoe#9214")
     },
     mod: async function(DBS, message, action, args, command, index) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
         switch(action.main) {
             case "create":
                 const Guild = await DBS.Bot.guilds.create(DBS.BetterMods.parseAction(action.guildname, message), {

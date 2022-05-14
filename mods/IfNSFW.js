@@ -44,7 +44,7 @@ module.exports = {
     },
 
     // When the bot is first started, this code will be ran.
-    init: function() {
+    init: function(DBS) {
         console.log("Loaded If NSFW Mod");
     },
 

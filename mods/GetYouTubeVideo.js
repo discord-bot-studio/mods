@@ -54,12 +54,16 @@ module.exports = {
 
     // When the bot is first started, this code will be ran.
     init: function(DBS) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
         console.log("Loaded GetYouTubeVideo");
         DBS.BetterMods.requireModule("scrape-youtube")
     },
 
     // Place your mod here.
     mod: async function(DBS, message, action, args, command, index) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
         const youtube = require('scrape-youtube').default;
         const video = (await youtube.search(DBS.BetterMods.parseAction(action.searchquery, message))).videos[0];
         DBS.BetterMods.saveVar(action.vartype, action.storeresult, video.link, message.guild)

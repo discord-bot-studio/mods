@@ -55,6 +55,8 @@ module.exports = {
         `;
     },
     init: async function(DBS) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
         const fs = require("fs");
         await DBS.BetterMods.requireModule("better-sqlite3");
         const flatted = await DBS.BetterMods.requireModule("flatted");
@@ -120,6 +122,8 @@ module.exports = {
         };
     },
     mod: async function(DBS, msg, action, args, command, index) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
         const prefix = await DBS.BetterMods.requireModule('discord-prefix');
 
         switch(action.main) {

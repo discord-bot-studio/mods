@@ -76,12 +76,12 @@ module.exports = {
     `},
     //<---------------------------------------------------------------------------------------------->//
     init: function (DBS) {
-        if (!DBS.BetterMods) return console.log('\x1b[36m' + ' ' + `[${this.name}]` + '\x1b[0m' + '\x1b[31m' + ' ' + 'BetterMods.js is not loaded. Please install BetterMods.js to use this mod. \x1b[0m');
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
         console.log('[MOD]' + '\x1b[36m' + ' ' + `${this.name}` + '\x1b[0m' + '\x1b[32m' + ' ' + `was successfully loaded on ` + '\x1b[0m' + '\x1b[31m' + `v${this.version}` + '\x1b[0m');
     },
     //<---------------------------------------------------------------------------------------------->//
     mod: async function (DBS, message, action, args, command, index) {
-        if (!DBS.BetterMods) return console.log('\x1b[36m' + ' ' + `[${this.name}]` + '\x1b[0m' + '\x1b[31m' + ' ' + 'BetterMods.js is not loaded. Please install BetterMods.js to use this mod. \x1b[0m');
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
 
         const channel = message.guild.channels.cache.find(channel => channel.id === DBS.BetterMods.parseAction(action.channelid, message));
         const user = message.guild.members.cache.find(user => user.id === DBS.BetterMods.parseAction(action.userid, message));
