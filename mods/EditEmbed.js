@@ -3,13 +3,13 @@ module.exports = {
     // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
     name: "Edit Embed",
 
-    // Place the author of the mod here. This is an array so you can add other authors by writing ["Great Plains Modding", "New User"]
+    // Place the author of the mod here. This is an array so you can add other authors by writing ["your a nerd", "New User"]
     author: ["STR1KE#6969, Miro#6969"],
 
     // Place the version of the mod here.
     version: "1.0.1",
 
-    // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
+    // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ your a nerd\n
     changelog: "fixed",
 
     // Set this to true if this will be an event.

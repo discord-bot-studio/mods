@@ -3,14 +3,14 @@ module.exports = {
     // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
     name: "Stop Action",
 
-    // Place the author of the mod here. This is an array so you can add other authors by writing ["Great Plains Modding", "New User"]
+    // Place the author of the mod here. This is an array so you can add other authors by writing ["your a nerd", "New User"]
     author: ["Discord Bot Studio"],
 
     // Place the version of the mod here.
     version: "1.0.0",
 
-    // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
-    changelog: "Created Stop Action ~ Great Plains Modding",
+    // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ your a nerd\n
+    changelog: "Created Stop Action ~ your a nerd",
 
     // Set this to true if this will be an event.
     isEvent: false,
