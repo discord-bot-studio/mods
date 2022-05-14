@@ -7,10 +7,10 @@ module.exports = {
     author: ["Vannzilla#5260"],
 
     // Place the version of the mod here.
-    version: "0.1.0",
+    version: "0.1.1",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ your a nerd\n
-    changelog: "Created send inv link node",
+    changelog: "Added variable support",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -37,25 +37,33 @@ module.exports = {
                 <label>Permissions integer (8 = administrator) *</label>
                 <textarea class="form-control needed-field" name="permInt" rows="1" ></textarea>
             </div>
+            <hr>
             <div class="form-group">
-                <label>Message Text (use $$link$$ to insert the invite link) *</label>
-                <textarea class="form-control needed-field" name="msgText" rows="3" ></textarea>
+                <label for="varname">Var Name to save link in*</label>
+                <input type="text" class="form-control" name="varname" id="varname">
+            </div>
+            <div class="form-group">
+                <label for="vartype">Var Type *</label>
+                <select name="vartype" id="vartype" class="form-control">
+                    <option value="temp">Temp</option>
+                    <option value="server">Server</option>
+                    <option value="global">Global</option>
+                </select>
             </div>
         `;
     },
 
     // When the bot is first started, this code will be ran.
     init: function(DBS) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
         console.log("Loaded Inv Link");
     },
 
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
-        var msg = action.msgtext
         var link = `https://discord.com/api/oauth2/authorize?client_id=${action.clientid}&permissions=${action.permint}&scope=bot`
-        msg = msg.replace("$$link$$", link);
+        DBS.BetterMods.saveVar(action.vartype, action.varname, link, message.guild);
 
-        message.channel.send(msg)
         DBS.callNextAction(command, message, args, index + 1)
     }
 };
