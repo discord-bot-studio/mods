@@ -164,7 +164,7 @@ module.exports = {
         
             <hr>
         
-            <h4>Create a Switch case with Variable to check \${tempVars.captcha} and values true and false after this node. See <a href="https://imgur.com/a/GGjsN4p" target="none">example.</a></h4>
+            <h4>Create a Switch case with Variable to check \${tempVars.captcha} and values true and false after this node. See <a href="https://i.imgur.com/vM8WCQc.png" target="none">example.</a></h4>
         
         </div>
         
