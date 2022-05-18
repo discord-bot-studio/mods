@@ -1,8 +1,8 @@
 module.exports = {
     name: "Leaderboard",
     author: ["PlayboyPrime#3839"],
-    version: "1.0.0",
-    changelog: "Release",
+    version: "1.0.1",
+    changelog: "Fixed an issue with the sorting",
     isEvent: false,
     isResponse: true,
     isMod: true,
@@ -41,30 +41,38 @@ module.exports = {
         `;
     },
     init: function (DBS) {
-        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
         console.log("Loaded Leaderboard");
     },
     mod: async function (DBS, message, action, args, command, index) {
         const fs = require("fs")
-        const { resolve } = require('path');
-        const ud = JSON.parse(fs.readFileSync(resolve(__dirname, "../BotData/user/user.json"), 'utf8'));
-
+        const { resolve } = require('path')
+        const ud = JSON.parse(fs.readFileSync(resolve(__dirname, "../BotData/user/user.json"), 'utf8'))
         const df = DBS.BetterMods.parseAction(action.df, message)
-        var array = []
 
+        var temparray = []
+        var array = []
         var msg = ""
         var place = 1
 
         Object.entries(ud.users).forEach(user =>{
-            array.push(user)
+            temparray.push(user)
         })
 
-        const ascending = (a,b) => a[1].xp - b[1].xp;
-        const descending = (a,b) => b[1].xp - a[1].xp;
+        for (let i = 0; i < temparray.length; i++) {
+            const arr = temparray[i];
+            for (let j = 0; j < arr.length; j++) {
+                const value = arr[j];
+                if(value[df]){
+                    {
+                        array.push(arr)
+                    }
+                }
+            }
+        }
 
         if(action.sorttype == "ascending"){
-            array.sort(ascending);
-        } else array.sort(descending)
+            array.sort((a,b) => a[1][df] - b[1][df])
+        } else array.sort((a,b) => b[1][df] - a[1][df])
         
         array.forEach(user => {
             user.forEach(value => {
