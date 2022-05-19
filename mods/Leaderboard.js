@@ -1,8 +1,8 @@
 module.exports = {
     name: "Leaderboard",
     author: ["PlayboyPrime#3839"],
-    version: "1.0.1",
-    changelog: "Fixed an issue with the sorting",
+    version: "1.0.2",
+    changelog: "Added display limit",
     isEvent: false,
     isResponse: true,
     isMod: true,
@@ -12,7 +12,21 @@ module.exports = {
         return `
             <div class="form-group">
                 <label>Data field *</label>
-                <input class="form-control needed-field" id="df" name="df"></input>
+                <div class="input-group mb-3">
+                    <input class="form-control needed-field" id="df" name="df"></input>
+                    <div class="input-group-append">
+                        <a class="btn btn-outline-primary" role="button" id="variables" forinput="df">Insert Variable</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Display limit *</label>
+                <div class="input-group mb-3">
+                    <input class="form-control needed-field" id="dlimit" name="dlimit"></input>
+                    <div class="input-group-append">
+                        <a class="btn btn-outline-primary" role="button" id="variables" forinput="dlimit">Insert Variable</a>
+                    </div>
                 </div>
             </div>
 
@@ -23,7 +37,9 @@ module.exports = {
                     <option value="descending">Descending</option>
                 </select>
             </div>
+
             <hr>
+
             <div class="form-group">
                 <label>Variable Name *</label>
                 <input onchange="document.getElementById('varlabel').innerHTML = '$\{' + document.getElementById('vartype').value + 'Vars.' + document.getElementById('varname').value + '\}'" class="form-control needed-field" id="varname" name="varname"></input>
@@ -49,7 +65,9 @@ module.exports = {
         const { resolve } = require('path')
         const ud = JSON.parse(fs.readFileSync(resolve(__dirname, "../BotData/user/user.json"), 'utf8'))
         const df = DBS.BetterMods.parseAction(action.df, message)
+        const dlimit = DBS.BetterMods.parseAction(action.dlimit, message)
 
+        var amount = 0
         var temparray = []
         var array = []
         var msg = ""
@@ -78,8 +96,11 @@ module.exports = {
         array.forEach(user => {
             user.forEach(value => {
                 if(value[df]){
-                    msg = msg + place + ". <@" + user[0] + ">: " + value[df].toString() + " " + df + "\n"
-                    place++
+                    if(amount < parseInt(dlimit)){
+                        msg = msg + place + ". <@" + user[0] + ">: " + value[df].toString() + " " + df + "\n"
+                        place++
+                    }
+                    amount++
                 }
             })
         })
