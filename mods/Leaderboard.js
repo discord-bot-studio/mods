@@ -1,8 +1,8 @@
 module.exports = {
     name: "Leaderboard",
     author: ["PlayboyPrime#3839"],
-    version: "1.0.2",
-    changelog: "Added display limit",
+    version: "1.0.3",
+    changelog: "Added multiple values",
     isEvent: false,
     isResponse: true,
     isMod: true,
@@ -11,15 +11,55 @@ module.exports = {
     html: function (data) {
         return `
             <div class="form-group">
-                <label>Data field *</label>
+                <label>Data field 1 (Only this will be sorted) *</label>
                 <div class="input-group mb-3">
-                    <input class="form-control needed-field" id="df" name="df"></input>
+                    <input class="form-control needed-field" id="df1" name="df1"></input>
                     <div class="input-group-append">
-                        <a class="btn btn-outline-primary" role="button" id="variables" forinput="df">Insert Variable</a>
+                        <a class="btn btn-outline-primary" role="button" id="variables" forinput="df1">Insert Variable</a>
                     </div>
                 </div>
             </div>
 
+            <div class="form-group">
+                <label>Data field 2</label>
+                <div class="input-group mb-3">
+                    <input class="form-control" id="df2" name="df2"></input>
+                    <div class="input-group-append">
+                        <a class="btn btn-outline-primary" role="button" id="variables" forinput="df2">Insert Variable</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Data field 3</label>
+                <div class="input-group mb-3">
+                    <input class="form-control" id="df3" name="df3"></input>
+                    <div class="input-group-append">
+                        <a class="btn btn-outline-primary" role="button" id="variables" forinput="df3">Insert Variable</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Data field 4</label>
+                <div class="input-group mb-3">
+                    <input class="form-control" id="df4" name="df4"></input>
+                    <div class="input-group-append">
+                        <a class="btn btn-outline-primary" role="button" id="variables" forinput="df4">Insert Variable</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Data field 5</label>
+                <div class="input-group mb-3">
+                    <input class="form-control" id="df5" name="df5"></input>
+                    <div class="input-group-append">
+                        <a class="btn btn-outline-primary" role="button" id="variables" forinput="df5">Insert Variable</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
             <div class="form-group">
                 <label>Display limit *</label>
                 <div class="input-group mb-3">
@@ -31,15 +71,23 @@ module.exports = {
             </div>
 
             <div class="form-group">
+                <label>Seperator *</label>
+                <div class="input-group mb-3">
+                    <input class="form-control needed-field" id="sep" name="sep"></input>
+                    <div class="input-group-append">
+                        <a class="btn btn-outline-primary" role="button" id="variables" forinput="sep">Insert Variable</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label>Sort type *</label>
                 <select class="form-control" name="sorttype">
                     <option value="ascending" selected>Ascending</option>
                     <option value="descending">Descending</option>
                 </select>
             </div>
-
             <hr>
-
             <div class="form-group">
                 <label>Variable Name *</label>
                 <input onchange="document.getElementById('varlabel').innerHTML = '$\{' + document.getElementById('vartype').value + 'Vars.' + document.getElementById('varname').value + '\}'" class="form-control needed-field" id="varname" name="varname"></input>
@@ -64,7 +112,12 @@ module.exports = {
         const fs = require("fs")
         const { resolve } = require('path')
         const ud = JSON.parse(fs.readFileSync(resolve(__dirname, "../BotData/user/user.json"), 'utf8'))
-        const df = DBS.BetterMods.parseAction(action.df, message)
+        const df1 = DBS.BetterMods.parseAction(action.df1, message)
+        const df2 = DBS.BetterMods.parseAction(action.df2, message)
+        const df3 = DBS.BetterMods.parseAction(action.df3, message)
+        const df4 = DBS.BetterMods.parseAction(action.df4, message)
+        const df5 = DBS.BetterMods.parseAction(action.df5, message)
+        const sep = DBS.BetterMods.parseAction(action.sep, message) 
         const dlimit = DBS.BetterMods.parseAction(action.dlimit, message)
 
         var amount = 0
@@ -81,7 +134,7 @@ module.exports = {
             const arr = temparray[i];
             for (let j = 0; j < arr.length; j++) {
                 const value = arr[j];
-                if(value[df]){
+                if(value[df1]){
                     {
                         array.push(arr)
                     }
@@ -90,14 +143,21 @@ module.exports = {
         }
 
         if(action.sorttype == "ascending"){
-            array.sort((a,b) => a[1][df] - b[1][df])
-        } else array.sort((a,b) => b[1][df] - a[1][df])
-        
+            array.sort((a,b) => a[1][df1] - b[1][df1])
+        } else array.sort((a,b) => b[1][df1] - a[1][df1])
+
+        function val(value, df)
+        {
+            if(value){
+                return  df + ": " + value.toString() + " " + sep + " "
+            } else return ""
+        }        
         array.forEach(user => {
             user.forEach(value => {
-                if(value[df]){
+                if(value[df1]){
                     if(amount < parseInt(dlimit)){
-                        msg = msg + place + ". <@" + user[0] + ">: " + value[df].toString() + " " + df + "\n"
+                        msg = msg + place + ". <@" + user[0] + ">: " + val(value[df1], df1) + val(value[df2], df2) + val(value[df3], df3) + val(value[df4], df4) + val(value[df5], df5) + "\n"
+                        msg = msg.slice(0,-4) + "\n"
                         place++
                     }
                     amount++
