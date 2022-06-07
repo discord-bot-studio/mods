@@ -7,10 +7,10 @@ module.exports = {
     author: ["Discord Bot Studio"],
 
     // Place the version of the mod here.
-    version: "1.0.1",
+    version: "1.0.2",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ your a nerd\n
-    changelog: "Better Mods ~ your a nerd",
+    changelog: "Fixed getDescandantProp is not defined ~ PlayboyPrime",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -96,15 +96,15 @@ module.exports = {
             switch(type) {
                 case "temp":
                     DBS.Cache[guild.id].variables[varName] = data;
-                break;
+                break
                 case "server":
                     DBS.serverVars[guild.id][varName] = data;
-                break;
+                break
                 case "global":
                     DBS.globalVars[guild.id][varName] = data;
-                break;
-            };
-        };
+                break
+            }
+        }
 
         DBS.BetterMods.getVar = function(type, varName, guild) {
             switch(type) {
@@ -114,8 +114,15 @@ module.exports = {
                     return DBS.serverVars[guild.id][varName];
                 case "global":
                     return DBS.globalVars[guild.id][varName];
-            };
-        };
+            }
+        }
+        function getDescendantProp(obj, desc) {
+            var arr = desc.split(".");
+            while (arr.length) {
+                obj = obj[arr.shift()];
+            }
+            return obj;
+        }
     },
 
     // Place your mod here.
