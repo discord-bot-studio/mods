@@ -7,10 +7,10 @@ module.exports = {
     author: ["Discord Bot Studio"],
 
     // Place the version of the mod here.
-    version: "1.0.2",
+    version: "1.0.3",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ your a nerd\n
-    changelog: "Fixed getDescandantProp is not defined ~ PlayboyPrime",
+    changelog: "Added event support",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -69,26 +69,32 @@ module.exports = {
         };
 
         DBS.BetterMods.parseAction = function(string, msg) {
-            let dbsVars = {}
-            dbsVars["CommandAuthor"] = msg.member
-            dbsVars["CommandChannel"] = msg.channel
-            dbsVars["CommandMessage"] = msg
-            dbsVars["guild"] = msg.guild
-            dbsVars["DefaultChannel"] = Array.from(msg.guild.channels).sort((a,b) => a.calculatedPosition - b.calculatedPosition)[0]
             let tempVars = DBS.Cache[msg.guild.id].variables
             let serverVars = DBS.serverVars[msg.guild.id]
             let globalVars = DBS.globalVars[msg.guild.id]
+
+            let dbsVars = {
+                CommandAuthor: msg.member,
+                CommandChannel: msg.channel,
+                CommandMessage: msg,
+                guild: msg.guild,
+                DefaultChannel: Array.from(msg.guild.channels).sort((a,b) => a.calculatedPosition - b.calculatedPosition)[0],
+            }
+
             let vars = {
                 tempVars: tempVars,
                 serverVars: serverVars,
                 globalVars: globalVars,
                 dbsVars: dbsVars,
             }
+
             let varRegex = /\${(.*?)}/g;
             let newVal = string;
+
             for(let i = 0; i <string.match(varRegex)?.length; i++){
                 newVal = newVal.replace(string.match(varRegex)[i],getDescendantProp(vars,string.match(varRegex)[i].split("${").join("").split("}").join("")))
             }
+
             return newVal
         }
 
@@ -116,12 +122,62 @@ module.exports = {
                     return DBS.globalVars[guild.id][varName];
             }
         }
+
         function getDescendantProp(obj, desc) {
             var arr = desc.split(".");
             while (arr.length) {
                 obj = obj[arr.shift()];
             }
             return obj;
+        }
+
+        // Update DBS Intents
+        const { Client, Intents } = require('discord.js');
+
+        DBS.Bot = new Client({
+            intents: [
+                Intents.FLAGS.GUILDS,
+                Intents.FLAGS.GUILD_MEMBERS,
+                Intents.FLAGS.GUILD_BANS,
+                Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
+                Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+                Intents.FLAGS.GUILD_VOICE_STATES,
+                Intents.FLAGS.GUILD_MESSAGES,
+                Intents.FLAGS.GUILD_MESSAGE_TYPING,
+                Intents.FLAGS.DIRECT_MESSAGES,
+                Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
+                Intents.FLAGS.DIRECT_MESSAGE_TYPING,
+            ],
+            partials: [
+                'CHANNEL', // Required to receive DMs
+            ]
+        });
+
+        // Event Extension Handler
+        DBS.Cache["BetterMods"] = {}  
+        
+        const EventExtension = [];
+        require("fs")
+        .readdirSync(__dirname)
+        .forEach(mod => {
+            const fetchedMod = require(`${__dirname}/${mod}`);
+            if (fetchedMod.BetterMods) {
+                if (fetchedMod.BetterMods.isEvent) {
+                    EventExtension[fetchedMod.name] = fetchedMod;
+                }
+            }
+        });
+
+        for (let command of DBS.CommandsFile.command) {
+            for (let i = 0; i < command.actions.length; i++) {
+                const data = EventExtension[command.actions[i].type];
+
+                if (data) {
+                    DBS.Bot.on(data.BetterMods.event, (...args) => {
+                        data.mod(DBS, command, "Type:BetterMods:Trigger", ...args)
+                    })
+                }
+            }
         }
     },
 
