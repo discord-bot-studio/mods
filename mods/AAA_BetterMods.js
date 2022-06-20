@@ -7,10 +7,10 @@ module.exports = {
     author: ["Discord Bot Studio"],
 
     // Place the version of the mod here.
-    version: "1.0.3",
+    version: "1.0.4",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ your a nerd\n
-    changelog: "Added event support",
+    changelog: "Fixed an issue with the bot not responding to default events.",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -151,6 +151,360 @@ module.exports = {
             partials: [
                 'CHANNEL', // Required to receive DMs
             ]
+        });
+
+        DBS.Bot.on("messageCreate", message => DBS.checkMessage(message));
+        DBS.Bot.on("guildMemberAdd", member => {
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "User Joins Server", member);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Guild member add: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("guildMemberRemove", member => {
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "User Kicked", member);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Guild member remove: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("guildBanAdd", (guild, user) => {
+            let banVars = {};
+            banVars.guild = guild;
+            banVars.user = user;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "User Banned", banVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Guild ban add: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("channelCreate", channel => {
+            let channelVars = {};
+            channelVars.guild = channel.guild;
+            channelVars.channel = channel;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Channel Create", channelVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Channel create: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("channelDelete", channel => {
+            let channelVars = {};
+            channelVars.guild = channel.guild;
+            channelVars.channel = channel;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Channel Delete", channelVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Channel delete: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("channelPinsUpdate", (channel, time) => {
+            let channelVars = {};
+            channelVars.guild = channel.guild;
+            channelVars.channel = channel;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Channel Pins Update", channelVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Channel pins update: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("channelUpdate", (oldchannel, newchannel) => {
+            let channelVars = {};
+            channelVars.guild = newchannel.guild;
+            channelVars.oldchannel = oldchannel;
+            channelVars.newchannel = newchannel;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Channel Update", channelVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Channel update: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("emojiCreate", emoji => {
+            let emojiVars = {};
+            emojiVars.guild = emoji.guild;
+            emojiVars.emoji = emoji;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Emoji Create", emojiVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Emoji create: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("emojiDelete", emoji => {
+            let emojiVars = {};
+            emojiVars.guild = emoji.guild;
+            emojiVars.emoji = emoji;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Emoji Delete", emojiVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Emoji delete: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("emojiUpdate", (oldemoji, newemoji) => {
+            let emojiVars = {};
+            emojiVars.guild = newemoji.guild;
+            emojiVars.oldemoji = oldemoji;
+            emojiVars.newemoji = newemoji;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Emoji Update", emojiVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Emoji update: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("guildBanRemove", (guild, user) => {
+            let emojiVars = {};
+            emojiVars.guild = guild;
+            emojiVars.user = user;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Guild Ban Remove", emojiVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Guild ban remove: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("guildCreate", guild => {
+            let guildVars = {};
+            guildVars.guild = guild;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Guild Create", guildVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Guild create: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("guildDelete", guild => {
+            let guildVars = {};
+            guildVars.guild = guild;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Guild Delete", guildVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Guild delete: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("guildMemberAvailable", member => {
+            let guildVars = {};
+            guildVars.guild = member.guild;
+            guildVars.member = member;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Guild Member Available", guildVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Guild member available: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("guildMemberSpeaking", (member, speaking) => {
+            let guildVars = {};
+            guildVars.guild = member.guild;
+            guildVars.member = member;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Guild Member Speaking", guildVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Guild member speaking: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("guildMemberUpdate", (oldmember, newmember) => {
+            let guildVars = {};
+            guildVars.guild = newmember.guild;
+            guildVars.oldmember = oldmember;
+            guildVars.newmember = newmember;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Guild Member Update", guildVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Guild member update: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("guildUnavailable", guild => {
+            let guildVars = {};
+            guildVars.guild = guild;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Guild Unavailable", guildVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Guild unavailable: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("guildUpdate", (oldguild, newguild) => {
+            let guildVars = {};
+            guildVars.guild = newguild;
+            guildVars.oldguild = oldguild;
+            guildVars.newguild = newguild;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Guild Update", guildVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Guild update: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("messageDelete", message => {
+            console.log("message deleted");
+            let guildVars = {};
+            guildVars.guild = message.guild;
+            guildVars.message = message;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Message Delete", guildVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Message delete: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("messageUpdate", (oldmessage, newmessage) => {
+            let guildVars = {};
+            guildVars.guild = newmessage.guild;
+            guildVars.newmessage = newmessage;
+            guildVars.oldmessage = oldmessage;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Message Update", guildVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Message update: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("roleCreate", role => {
+            let guildVars = {};
+            guildVars.guild = role.guild;
+            guildVars.role = role;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Role Create", guildVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Role create: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("roleDelete", role => {
+            let guildVars = {};
+            guildVars.guild = role.guild;
+            guildVars.role = role;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Role Delete", guildVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Role delete: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("roleUpdate", (oldrole, newrole) => {
+            let guildVars = {};
+            guildVars.guild = newrole.guild;
+            guildVars.oldrole = oldrole;
+            guildVars.newrole = newrole;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Role Update", guildVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Role update: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("typingStart", (typing) => {
+            let guildVars = {};
+            guildVars.guild = typing.channel.guild;
+            guildVars.channel = typing.channel;
+            guildVars.user = typing.user;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Typing Start", guildVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Typing start: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("userUpdate", (olduser, newuser) => {
+            let guildVars = {};
+            guildVars.guild = newuser.guild;
+            guildVars.olduser = olduser;
+            guildVars.newuser = newuser;
+            try {
+                DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "User Update", guildVars);
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "User Update: " + error.stack
+                });
+            }
+        });
+        DBS.Bot.on("interactionCreate", async interaction => {
+            let guildVars = {};
+            guildVars.guild = interaction.guild;
+            try {
+                if (interaction.isButton()) {
+                    await interaction.deferReply({ephemeral: DBS.buttons[interaction.customId]["ephemeral"]});
+                    guildVars.buttoninteraction = interaction;
+                    DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Button Interaction", guildVars);
+                } else if (interaction.isSelectMenu()) {
+                    console.log(DBS.selects);
+                    await interaction.deferReply({ephemeral: DBS.selects[interaction.customId]["ephemeral"]});
+                    guildVars.selectinteraction = interaction;
+                    DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Select Interaction", guildVars);
+                }
+                else {
+                    //interaction.followUp({ content: "hello" });
+                    await interaction.deferReply({ephemeral: DBS.slashCommands[interaction.commandName]["ephemeral"]});
+                    guildVars.commandinteraction = interaction;
+                    DBS.EventHandler.Event_Handle(DBS, DBS.EventsFile, 0, "Command Interaction", guildVars);
+                }
+            } catch (error) {
+                DBS.logError({
+                    level: "error",
+                    message: "Interaction Create: " + error.stack
+                });
+            }
         });
 
         // Event Extension Handler
