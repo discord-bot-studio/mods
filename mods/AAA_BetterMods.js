@@ -523,7 +523,7 @@ module.exports = {
         });
 
         for (let command of DBS.CommandsFile.command) {
-            for (let i = 0; i < command.actions.length; i++) {
+            for (let i = 0; i < (command.actions || []).length; i++) {
                 const data = EventExtension[command.actions[i].type];
 
                 if (data) {
