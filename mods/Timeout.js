@@ -46,12 +46,12 @@ module.exports = {
         if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
 
         console.log("Loaded Timeout Mod ~ aoe#4851")
-        console.log('\x1b[33m%s\x1b[0m', '[Timeout Mod] - Installing newest discord.js Version.');
-        var process = require('child_process');
-        process.exec('npm install discord.js@latest',async function (err) {
-            if (err) throw err
-        });
-        console.log('\x1b[32m%s\x1b[0m', '[Timeout Mod] - Finnished installing the newest discord.js Version!');
+//        console.log('\x1b[33m%s\x1b[0m', '[Timeout Mod] - Installing newest discord.js Version.');
+//        var process = require('child_process');
+//        process.exec('npm install discord.js@latest',async function (err) {
+//            if (err) throw err
+//        });
+//        console.log('\x1b[32m%s\x1b[0m', '[Timeout Mod] - Finnished installing the newest discord.js Version!');
     },
     mod: async function(DBS, message, action, args, command, index) {
         if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
