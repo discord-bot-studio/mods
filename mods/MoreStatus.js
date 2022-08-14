@@ -4,13 +4,13 @@ module.exports = {
     name: "More Status",
 
     // Place the author of the mod here. This is an array so you can add other authors by writing ["your a nerd", "New User"]
-    author: ["Vannzilla#5260, Revised by Big D#1129"],
+    author: ["Vannzilla#5260, Updated by Jeroentje#4361"],
 
     // Place the version of the mod here.
     version: "0.3.1",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ your a nerd\n
-    changelog: "Added watching and listening status options and the ability to add server/member count to status",
+    changelog: "Updated",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -52,8 +52,8 @@ module.exports = {
     // Place your mod here.
     mod: function(DBS, message, action, args, command, index) {
         var status = action.statustext;
-        status = status.replace("$$Servers$$", DBS.Bot.guilds.size);
-        status = status.replace("$$Members$$", DBS.Bot.users.size);
+        status = status.replace("$$Servers$$", DBS.Bot.guilds.cache.size);
+        status = status.replace("$$Members$$", DBS.Bot.users.cache.size);
 
         DBS.Bot.user.setActivity(status, { type: action.statusoption})
         
