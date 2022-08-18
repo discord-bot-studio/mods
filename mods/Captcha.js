@@ -278,7 +278,7 @@ module.exports = {
     init: function (DBS) {
         if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
 
-        DBS.BetterMods.requireModule("captcha-canvas")
+        DBS.BetterMods.requireModule("captcha-canvas@3.1")
         console.log("Loaded Captcha");
     },
 
