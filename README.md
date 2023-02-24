@@ -45,3 +45,6 @@ mod: async function(DBS, message, action, args, command, index) {
 
 ## Events
 Note events wont show in Discord Bot Studio but the mod function is still called.
+
+## Feature requests
+[Request new features](https://app.loopliz.com/discordbotstudio/board/Feature%20Requests)
