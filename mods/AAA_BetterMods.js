@@ -97,32 +97,32 @@ module.exports = {
 
             return newVal
         }
-
-        DBS.BetterMods.saveVar = function(type, varName, data, guild) {
-            switch(type) {
+        DBS.BetterMods.saveVar = function (type, varName, data, guild) {
+            switch (type) {
                 case "temp":
                     DBS.Cache[guild.id].variables[varName] = data;
-                break
+                    break;
                 case "server":
+                    DBS.serverVars[guild.id] ??= {};
                     DBS.serverVars[guild.id][varName] = data;
-                break
+                    break;
                 case "global":
-                    DBS.globalVars[guild.id][varName] = data;
-                break
+                    DBS.globalVars[varName] = data;
+                    break;
             }
         }
 
-        DBS.BetterMods.getVar = function(type, varName, guild) {
-            switch(type) {
+        DBS.BetterMods.getVar = function (type, varName, guild) {
+            switch (type) {
                 case "temp":
                     return DBS.Cache[guild.id].variables[varName];
                 case "server":
+                    DBS.serverVars[guild.id] ??= {};
                     return DBS.serverVars[guild.id][varName];
                 case "global":
-                    return DBS.globalVars[guild.id][varName];
+                    return DBS.globalVars[varName];
             }
         }
-
         function getDescendantProp(obj, desc) {
             var arr = desc.split(".");
             while (arr.length) {
