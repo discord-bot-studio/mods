@@ -1,8 +1,8 @@
 module.exports = {
     name: "Leaderboard",
     author: ["PlayboyPrime#3839"],
-    version: "1.0.3",
-    changelog: "Added multiple values",
+    version: "1.0.4",
+    changelog: "Changed from mention to name",
     isEvent: false,
     isResponse: true,
     isMod: true,
@@ -117,53 +117,57 @@ module.exports = {
         const df3 = DBS.BetterMods.parseAction(action.df3, message)
         const df4 = DBS.BetterMods.parseAction(action.df4, message)
         const df5 = DBS.BetterMods.parseAction(action.df5, message)
-        const sep = DBS.BetterMods.parseAction(action.sep, message) 
+        const sep = DBS.BetterMods.parseAction(action.sep, message)
         const dlimit = DBS.BetterMods.parseAction(action.dlimit, message)
 
-        var amount = 0
-        var temparray = []
-        var array = []
-        var msg = ""
-        var place = 1
+        let amount = 0
+        let temparray = []
+        let array = []
+        let msg = ""
+        let place = 1
 
-        Object.entries(ud.users).forEach(user =>{
-            temparray.push(user)
-        })
+        Object.entries(ud.users).forEach(user => temparray.push(user))
 
-        for (let i = 0; i < temparray.length; i++) {
-            const arr = temparray[i];
-            for (let j = 0; j < arr.length; j++) {
-                const value = arr[j];
-                if(value[df1]){
-                    {
-                        array.push(arr)
-                    }
-                }
+        for (const arr of temparray) {
+            for (const value of arr) {
+                if (value[df1]) array.push(arr)
             }
         }
 
-        if(action.sorttype == "ascending"){
-            array.sort((a,b) => a[1][df1] - b[1][df1])
-        } else array.sort((a,b) => b[1][df1] - a[1][df1])
+        if (action.sorttype == "ascending") {
+            array.sort((a, b) => a[1][df1] - b[1][df1])
+        } else array.sort((a, b) => b[1][df1] - a[1][df1])
 
-        function val(value, df)
-        {
-            if(value){
-                return  df + ": " + value.toString() + " " + sep + " "
+        function val(value, df) {
+            if (value) {
+                return `${df}: ${value.toString()} ${sep} `
             } else return ""
-        }        
-        array.forEach(user => {
-            user.forEach(value => {
-                if(value[df1]){
-                    if(amount < parseInt(dlimit)){
-                        msg = msg + place + ". <@" + user[0] + ">: " + val(value[df1], df1) + val(value[df2], df2) + val(value[df3], df3) + val(value[df4], df4) + val(value[df5], df5) + "\n"
-                        msg = msg.slice(0,-4) + "\n"
+        }
+        async function fetchUser(UserId) {
+            let ret = ""
+            await DBS.Bot.users.fetch(UserId)
+                .then(User => {
+                    ret = User.username
+                })
+                .catch(() => {
+                    ret = `Unknown (<@${UserId}>)`
+                })
+
+            return ret
+        }
+
+        for (const user of array) {
+            for (const value of user) {
+                if (value[df1]) {
+                    if (amount < parseInt(dlimit)) {
+                        msg += place + ". " + await fetchUser(user[0]) + ": " + val(value[df1], df1) + val(value[df2], df2) + val(value[df3], df3) + val(value[df4], df4) + val(value[df5], df5) + "\n"
+                        msg = msg.slice(0, -4) + "\n"
                         place++
                     }
                     amount++
                 }
-            })
-        })
+            }
+        }
 
         DBS.BetterMods.saveVar(action.vartype, action.varname, msg, message.guild)
 
