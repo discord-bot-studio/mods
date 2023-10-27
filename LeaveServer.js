@@ -7,10 +7,10 @@ module.exports = {
     author: ["aoe#9022", "@miroxik74"],
 
     // Place the version of the mod here.
-    version: "1.0.1",
+    version: "1.0.2",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
-    changelog: "Now the bot sends the message correctly",
+    changelog: "Added variables and field for server id",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -29,20 +29,41 @@ module.exports = {
     // Place your html to show inside of Discord Bot Studio when they select your mod.
     html: function(data) {
         return `
+
             <div class="form-group">
-                <label>Color (ex. 9EFF91)*</label>
-                <textarea class="form-control needed-field" name="messagecolor" rows="1" ></textarea>
+                    <label">Guild ID *</label>
+                <div class="input-group mb-3">
+                    <input class="form-control needed-field" id="gid" name="gid"></input>
+                <div class="input-group-append">
+                    <a class="btn btn-outline-primary" role="button" id="variables" forinput="gid">Insert Variable</a>
+                    </div>
+                </div>
             </div>
+
+            <div class="form-group">
+                <label>Color</label>
+                <input class="form-control jscolor" name="color" id="color" placeholder="#FFFFFF">
+                <small class="form-text text-muted">Hex color</small>
+             </div>
+
             <div class="form-group">
                 <label>Title *</label>
-                <textarea class="form-control needed-field" name="messagetitle" rows="1" ></textarea>
+                <div class="input-group mb-3">
+                    <textarea class="form-control needed-field" name="title" id="title" rows="1" ></textarea>
+                    <div class="input-group-append">
+                        <a class="btn btn-outline-primary" role="button" id="variables" forinput="title">Insert Variable</a>
+                    </div>
+                </div>
             </div>
+
             <div class="form-group">
                 <label>Description *</label>
-                <textarea class="form-control needed-field" name="messagedesc" rows="2" ></textarea>
-            </div>
-            <div class="form-group">
-                <label>This embed will be sent one second before leaving server where you using command </label>
+                <div class="input-group mb-3">
+                    <textarea rows="3" class="form-control needed-field" name="description" id="description"></textarea>
+                    <div class="input-group-append">
+                        <a class="btn btn-outline-primary" role="button" id="variables" forinput="description">Insert Variable</a>
+                    </div>
+                </div>
             </div>
         `;
     },
@@ -53,15 +74,21 @@ module.exports = {
     },
 
     // Place your mod here.
-    mod: function(DBS, message, action, args, command, index) {
-            const Discord = require("discord.js");
-            const embed = new Discord.MessageEmbed()
-            .setColor(action.messagecolor, message)
-            .setTitle(action.messagetitle, message)
-            .setDescription(action.messagedesc, message)
-    
-            console.log(`leaving...`);
-            message.channel.send({ embeds: [embed] }).then(sentMessage =>  message.guild.leave())
+    mod: async function(DBS, message, action, args, command, index) {
+            const Discord = require("discord.js")
+            const server = DBS.Bot.guilds.cache.get(DBS.BetterMods.parseAction(action.gid, message))
+                const embed = new Discord.MessageEmbed()
+                .setColor(DBS.BetterMods.parseAction(action.color, message))
+                .setTitle(DBS.BetterMods.parseAction(action.title, message))
+                .setDescription(DBS.BetterMods.parseAction(action.description, message))
+            if (!server) {
+                return message.reply('Invalid server ID');
+            } try {
+                await server.leave();
+                message.reply({embeds:[embed]});
+              } catch (error) {
+                message.reply('An error occurred while leaving the server.');
+              }
         
         DBS.callNextAction(command, message, args, index + 1);
     }
