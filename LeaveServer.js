@@ -10,7 +10,7 @@ module.exports = {
     version: "1.0.2",
 
     // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
-    changelog: "Added variables and field for server id",
+    changelog: "Now the response will be sent even if it was used on the same server",
 
     // Set this to true if this will be an event.
     isEvent: false,
@@ -82,12 +82,12 @@ module.exports = {
                 .setTitle(DBS.BetterMods.parseAction(action.title, message))
                 .setDescription(DBS.BetterMods.parseAction(action.description, message))
             if (!server) {
-                return message.reply('Invalid server ID');
+                return message.reply({ content: `Invalid server ID`, allowedMentions: { repliedUser: false }});
             } try {
+                message.reply({ embeds: [embed], allowedMentions: { repliedUser: false }});
                 await server.leave();
-                message.reply({embeds:[embed]});
               } catch (error) {
-                message.reply('An error occurred while leaving the server.');
+                message.reply({ content: `An error occurred while leaving the server: ${error}`, allowedMentions: { repliedUser: false }});
               }
         
         DBS.callNextAction(command, message, args, index + 1);
