@@ -35,7 +35,7 @@ module.exports = {
     // Place your html to show inside of Discord Bot Studio when they select your mod.
     html: function(data) {
         return `
-            <h1>On Direct Message</h1>
+            <h1>On Message</h1>
             <b>Note: You must click save or this mod wont work.</b>
         `;
     },
